@@ -45,4 +45,4 @@ At the start of the program:
 
 ---
 
-> Built with passion and bugs by Nderon Beqiri 🐍
+> Built by Nderon Beqiri 🐍
