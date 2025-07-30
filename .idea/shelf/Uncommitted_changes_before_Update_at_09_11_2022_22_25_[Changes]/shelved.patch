@@ -1,0 +1,1785 @@
+Index: src/classHolder/Food.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package classHolder;\n\nimport java.awt.Graphics;\nimport java.util.Random;\n\npublic class Food extends MyFrame.SnakeObject\n{\n\tpublic Food()\t{\n\t\tthis.l = true;\n\t\t//initialises fruits 0-9 to come up but we want 0-16\n\t\tthis.i = ImageUtil.images.get(String.valueOf(new Random().nextInt(17)));\n\t\tthis.w = i.getWidth(null);\n\t\tthis.h = i.getHeight(null);\n\n\t\t//spawn food at random areas\n\t\tthis.x = (int) (Math.random() * (860 - w));\n\t\tthis.y = (int) (Math.random() * (550 - h - 40));\n\t}\n\n\t//function for snake eating food (instersecting cooridincates)\n\tpublic void eaten(MyFrame.MySnake mySnake)\t{\n\n\t\tif (mySnake.getRectangle().intersects(this.getRectangle()) && l && mySnake.l)\t\t{\n\t\t\tthis.l = false;\n\t\t\tmySnake.changeLength(mySnake.getLength() + 1);\n\t\t\t//when food is consumed by snake, increment score by 500\n\t\t\tmySnake.score += 500;\n\t\t}\n\t}\n\t@Override\n\tpublic void draw(Graphics g)\n\t{\n\t\tg.drawImage(i, x, y, null);\n\t}\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/classHolder/Food.java b/src/classHolder/Food.java
+--- a/src/classHolder/Food.java	(revision b47330579b923818631d80c1628c830a9eeb628a)
++++ b/src/classHolder/Food.java	(date 1667924435586)
+@@ -3,8 +3,11 @@
+ import java.awt.Graphics;
+ import java.util.Random;
+ 
++/** Called to display food image in frame when game begins
++ * @author Nderon Beqiri-modified */
+ public class Food extends MyFrame.SnakeObject
+ {
++	/**Sets image of fruit to one of the 17 images stored in ImageUtil class*/
+ 	public Food()	{
+ 		this.l = true;
+ 		//initialises fruits 0-9 to come up but we want 0-16
+@@ -17,7 +20,7 @@
+ 		this.y = (int) (Math.random() * (550 - h - 40));
+ 	}
+ 
+-	//function for snake eating food (instersecting cooridincates)
++	/**Determines if the snake has eaten the food; intersecting coordinates*/
+ 	public void eaten(MyFrame.MySnake mySnake)	{
+ 
+ 		if (mySnake.getRectangle().intersects(this.getRectangle()) && l && mySnake.l)		{
+@@ -27,9 +30,11 @@
+ 			mySnake.score += 500;
+ 		}
+ 	}
++	/**Draws the food in the frame*/
+ 	@Override
+ 	public void draw(Graphics g)
+ 	{
+ 		g.drawImage(i, x, y, null);
+ 	}
+ }
++
+Index: src/classHolder/Play.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package classHolder;\nimport java.awt.*;\nimport java.awt.event.KeyEvent;\nimport java.io.IOException;\npublic class Play extends MyFrame\n{\n\tprivate ScoreToFile username = new ScoreToFile();\n\tprivate static final long serialVersionUID = -3641221053272056036L;\n\tprivate int counter=0;\n\n\tprivate ScoreToFile highscore = new ScoreToFile();\n\tprivate static int choice;\n\n\tprivate static MySnake mySnake = new MySnake(100, 100);// x , y\n\tprivate Food food = new Food();\n\n\tprivate Image background = ImageUtil.images.get(\"UI-background\");\n\tprivate Image background2 = ImageUtil.images.get(\"UI-background2\");\n\tprivate Image extraLevel = ImageUtil.images.get(\"UI-background3\");\n\n\tprivate Image fail = ImageUtil.images.get(\"game-scene-01\");\n\n\tprivate Image zero = ImageUtil.images.get(\"lowscore\");\n\n\t@Override\n\tpublic void keyPressed(KeyEvent e)\n\t{\n\t\tsuper.keyPressed(e);\n\t\tmySnake.keyPressed(e);\n\t}\n\n\t@Override\n\tpublic void paint(Graphics g)\n\t{\n\t\tsuper.paint(g);\n\t\tGraphics2D g2D = (Graphics2D) g;\n\t\t//draw Sky Background\n\t\tif(choice==0) {\n\t\t\tg.drawImage(background, 0, 0, null);\n\t\t\t//drawing obstacles for sky background\n\t\t\tg2D.setPaint(Color.blue);\n\t\t\tg2D.drawRect(300,200,25,50);\n\t\t\tg2D.fillRect(300,200,25,50);\n\t\t\tif((mySnake.x>=295 && mySnake.x<=320)&&(mySnake.y==195)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\t\t\tif((mySnake.x>=295 && mySnake.x<=320)&&(mySnake.y==245)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\t\t\tif((mySnake.y>=195 && mySnake.y<=245)&&(mySnake.x==295)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\t\t\tif((mySnake.y>=195 && mySnake.y<=245)&&(mySnake.x==320)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\n\t\t\tg2D.setPaint(Color.red);\n\t\t\tg2D.drawRect(500,300,100,150);\n\t\t\tg2D.fillRect(500,300,100,150);\n\t\t\tif((mySnake.x>=495 && mySnake.x<=595)&&(mySnake.y==295)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\t\t\tif((mySnake.x>=495 && mySnake.x<=595)&&(mySnake.y==445)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\t\t\tif((mySnake.y>=295 && mySnake.y<=445)&&(mySnake.x==495)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\t\t\tif((mySnake.y>=295 && mySnake.y<=445)&&(mySnake.x==595)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\n\t\t\tg2D.setPaint(Color.black);\n\t\t\tg2D.drawRect(400,100,100,30);\n\t\t\tg2D.fillRect(400,100,100,30);\n\t\t\tif((mySnake.x>=395 && mySnake.x<=495)&&(mySnake.y==95)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\t\t\tif((mySnake.x>=395 && mySnake.x<=495)&&(mySnake.y==125)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\t\t\tif((mySnake.y>=95 && mySnake.y<=125)&&(mySnake.x==395)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\t\t\tif((mySnake.y>=95 && mySnake.y<=125)&&(mySnake.x==495)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\n\t\t\tg2D.setPaint(Color.green);\n\t\t\tg2D.drawRect(200,200,15,300);\n\t\t\tg2D.fillRect(200,200,15,300);\n\t\t\tif((mySnake.x>=195 && mySnake.x<=210)&&(mySnake.y==195)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\t\t\tif((mySnake.x>=195 && mySnake.x<=210)&&(mySnake.y==195)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\t\t\tif((mySnake.y>=195 && mySnake.y<=495)&&(mySnake.x==195)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\t\t\tif((mySnake.y>=195 && mySnake.y<=495)&&(mySnake.x==210)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\n\t\t}\n\n\t\t//draw Happy background\n\t\telse if(choice==2){\n\t\t\tg.drawImage(background2, 0, 0, null);\n\t\t\t//draw triangle obstacle\n\t\t\tint[] xPoints ={150,250,350};\n\t\t\tint[] yPoints ={300,150,300};\n\t\t\tg2D.setPaint(Color.yellow);\n\t\t\tg2D.drawPolygon(xPoints,yPoints,3);\n\t\t\tg2D.fillPolygon(xPoints,yPoints,3);\n\t\t\tg2D.setPaint(Color.magenta);\n\t\t\tg2D.setFont(new Font(\"Ink Free\",Font.BOLD,15));\n\t\t\tg2D.drawString(\"You can enter\",200,255);\n\t\t\tg2D.drawString(\"But\",230,275);\n\t\t\tg2D.drawString(\"Do not touch vertices!\",170,295);\n\n\n\t\t\t//determine boundaries for triangle\n\t\t\tif((mySnake.x>=140&&mySnake.x<=150)&&(mySnake.y>=299&&mySnake.y<=301)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\t\t\tif((mySnake.x>=240&&mySnake.x<=260)&&(mySnake.y>=145&&mySnake.y<=155)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\t\t\tif((mySnake.x>=340&&mySnake.x<=360)&&(mySnake.y>=299&&mySnake.y<=301)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\n\t\t\t//draw square obstacle\n\t\t\tg2D.setPaint(Color.pink);\n\t\t\tg2D.drawRect(500,250,200,200);\n\t\t\tg2D.fillRect(500,250,200,200);\n\n\t\t\t//determine boundaries for square\n\t\t\tif((mySnake.x>=495 && mySnake.x<=695)&&(mySnake.y==245)){\n\t\t\t\tmySnake.l=false;\n\t\t\t\tfood.l=false;\n\t\t\t}\n\t\t\tif((mySnake.x>=495 && mySnake.x<=695)&&(mySnake.y==245)){\n\t\t\t\tmySnake.l=false;\n\t\t\t\tfood.l=false;\n\t\t\t}\n\t\t\tif((mySnake.y>=245 && mySnake.y<=445)&&(mySnake.x==495)){\n\t\t\t\tmySnake.l=false;\n\t\t\t\tfood.l=false;\n\t\t\t}\n\t\t\tif((mySnake.y>=245 && mySnake.y<=445)&&(mySnake.x==695)){\n\t\t\t\tmySnake.l=false;\n\t\t\t\tfood.l=false;\n\t\t\t}\n\n\n\n\t\t}\n\n\n\n\n\n\n\t\t//draw Advanced Level Background\n\t\telse{\n\t\t\tg.drawImage(extraLevel, 0, 0, null);\n\t\t\t//draw rectangles and interlink them, forming a maze\n\t\t\tg2D.setPaint(Color.white);\n\t\t\tg2D.drawRect(230,80,15,325);\n\t\t\tg2D.fillRect(230,80,15,325);\n\t\t\tif((mySnake.x>=225 && mySnake.x<=240)&&(mySnake.y==75)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\t\t\tif((mySnake.x>=225 && mySnake.x<=240)&&(mySnake.y==75)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\t\t\tif((mySnake.y>=75 && mySnake.y<=400)&&(mySnake.x==225)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\t\t\tif((mySnake.y>=75 && mySnake.y<=400)&&(mySnake.x==240)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\n\t\t\tg2D.drawRect(245,262,400,15);\n\t\t\tg2D.fillRect(245,262,400,15);\n\t\t\tif((mySnake.x>=225 && mySnake.x<=640)&&(mySnake.y>=247&&mySnake.y<=262)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\t\t\tif((mySnake.x>=240 && mySnake.x<=640)&&(mySnake.y==257&&mySnake.y<=262)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\t\t\tif((mySnake.y>=257 && mySnake.y<=272)&&(mySnake.x==240)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\t\t\tif((mySnake.y>=257 && mySnake.y<=272)&&(mySnake.x==640)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\n\t\t\tg2D.drawRect(100,80,400,15);\n\t\t\tg2D.fillRect(100,80,400,15);\n\t\t\tif((mySnake.x>=95 && mySnake.x<=495)&&(mySnake.y==75)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\t\t\tif((mySnake.x>=95 && mySnake.x<=495)&&(mySnake.y==90)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\t\t\tif((mySnake.y>=75 && mySnake.y<=90)&&(mySnake.x==95)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\t\t\tif((mySnake.y>=75 && mySnake.y<=90)&&(mySnake.x==495)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\n\t\t\tg2D.drawRect(630,277,15,200);\n\t\t\tg2D.fillRect(630,277,15,200);\n\t\t\tif((mySnake.x>=625 && mySnake.x<=640)&&(mySnake.y==272)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\t\t\tif((mySnake.x>=625 && mySnake.x<=640)&&(mySnake.y==472)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\t\t\tif((mySnake.y>=272 && mySnake.y<=472)&&(mySnake.x==625)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\t\t\tif((mySnake.y>=272 && mySnake.y<=472)&&(mySnake.x==640)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\n\t\t\tg2D.drawRect(500,40,15,120);\n\t\t\tg2D.fillRect(500,40,15,120);\n\t\t\tif((mySnake.x>=495 && mySnake.x<=510)&&(mySnake.y==35)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\t\t\tif((mySnake.x>=495 && mySnake.x<=510)&&(mySnake.y==155)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\t\t\tif((mySnake.y>=35 && mySnake.y<=155)&&(mySnake.x==495)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\t\t\tif((mySnake.y>=35 && mySnake.y<=155)&&(mySnake.x==510)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\n\t\t\tg2D.drawRect(500,160,275,15);\n\t\t\tg2D.fillRect(500,160,275,15);\n\t\t\tif((mySnake.x>=495 && mySnake.x<=770)&&(mySnake.y==155)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\t\t\tif((mySnake.x>=495 && mySnake.x<=770)&&(mySnake.y==170)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\t\t\tif((mySnake.y>=155 && mySnake.y<=170)&&(mySnake.x==495)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\t\t\tif((mySnake.y>=155 && mySnake.y<=170)&&(mySnake.x==670)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\n\t\t\tg2D.drawRect(760,170,15,310);\n\t\t\tg2D.fillRect(760,170,15,310);\n\t\t\tif((mySnake.x>=755 && mySnake.x<=770)&&(mySnake.y==165)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\t\t\tif((mySnake.x>=755 && mySnake.x<=770)&&(mySnake.y==475)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\t\t\tif((mySnake.y>=165 && mySnake.y<=475)&&(mySnake.x==755)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\t\t\tif((mySnake.y>=165 && mySnake.y<=475)&&(mySnake.x==770)){\n\t\t\t\tmySnake.l=false;\n\t\t\t}\n\n\n\t\t}\n\n\n\t\t//if snake is true\n\t\tif (mySnake.l)\n\t\t{\n\n\t\t\t//draw snake\n\t\t\tmySnake.draw(g);\n\t\t\t//if food is true\n\t\t\tif (food.l)\n\t\t\t{\n\t\t\t\t//draw food\n\t\t\t\tfood.draw(g);\n\t\t\t\t//call function that determines snake eats food\n\t\t\t\tfood.eaten(mySnake);\n\t\t\t} else\n\t\t\t{\n\t\t\t\t//display new food image\n\t\t\t\tfood = new Food();\n\t\t\t}\n\t\t\t//show score on top left\n\t\t\tdrawScore(g);\n\n\n\t\t}\n\n\t\t//if snake dies, display fail image\n\t\telse {\n\t\t\tg.drawImage(fail, 120, 100, null);\n\t\t\tdrawFinalScore(g);\n\t\t\t//append result to file AllTimeScores.txt\n\t\t\twhile(counter<1) {\n\t\t\t\ttry {\n\t\t\t\t\thighscore.addToHighScore(mySnake.score);\n\t\t\t\t} catch (IOException e) {\n\t\t\t\t\tthrow new RuntimeException(e);\n\t\t\t\t}\n\t\t\t\t//highscore.readFile();\n\t\t\t\tcounter++;\n\t\t\t}\n\t\t}\n\n\t}\n\n\t//display current score on the top left\n\tpublic void drawScore(Graphics g)\n\t{\n\t\tg.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));\n\t\tg.setColor(Color.MAGENTA);\n\t\tg.drawString(\"SCORE : \" + mySnake.score, 20, 40);\n\t}\n\n\t//display final score in center, above end image\n\tpublic void drawFinalScore(Graphics g)\n\t{\n\t\t//Sky Background final score\n\t\tif(choice==0) {\n\t\t\tg.setFont(new Font(\"Consolas\",Font.PLAIN, 30));\n\t\t\tg.setColor(Color.white);\n\t\t\tg.drawString(\"Final Score : \" + mySnake.score, 275, 80);\n\t\t\tg.setColor(Color.BLUE);\n\t\t\t//condition added to not display well played if user achieves score of 0\n\t\t\tif(mySnake.score!=0) {\n\t\t\t\t//display username entered in start screen\n\t\t\t\tg.drawString(\"Well Played: \" + username.getUsername(), 275, 450);\n\t\t\t}\n\t\t}\n\n\n\t\t//Happy Background final score\n\t\telse if (choice==2) {\n\t\t\tg.setFont(new Font(\"Consolas\",Font.PLAIN, 30));\n\t\t\tg.setColor(Color.orange);\n\t\t\tg.drawString(\"Final Score : \" + mySnake.score, 275, 80);\n\t\t\tg.setColor(Color.BLACK);\n\t\t\t//condition added to not display well played if user achieves score of 0\n\t\t\tif(mySnake.score!=0) {\n\t\t\t\tg.drawString(\"Well Played: \" + username.getUsername(), 275, 450);\n\t\t\t}\n\n\t\t}\n\n\n\t\t//Advanced Level Background final score\n\t\telse{\n\t\t\tg.setFont(new Font(\"Consolas\",Font.PLAIN, 30));\n\t\t\tg.setColor(Color.MAGENTA);\n\t\t\tg.drawString(\"Special Level Score : \" + mySnake.score, 275, 80);\n\t\t\tg.setColor(Color.white);\n\t\t\t//condition added to not display well played if user achieves score of 0\n\t\t\tif(mySnake.score!=0) {\n\t\t\t\tg.drawString(\"Well Played: \" + username.getUsername(), 275, 450);\n\t\t\t}\n\t\t}\n\n\n\t\t//Prank message and image if user achieves score of 0\n\t\tif(mySnake.score==0){\n\t\t\tg.setColor(Color.RED);\n\t\t\tg.setFont(new Font(\"Consolas\",Font.PLAIN, 30));\n\t\t\tg.drawImage(zero, 120, 100, null);\n\t\t\tg.drawString(\"404 ERROR- \"+username.getUsername()+\" -YOU'RE TERRIBLE\",220,445);\n\t\t\tg.drawString(\"You cannot get a lower score\",235,475);\n\n\t\t}\n\n\t}\n\n\t//called for Basic Level && Sky Background\n\tpublic static void playBegins() throws InterruptedException, IOException {\n\t\tnew Play().loadFrame();\n\t\t//Make music loop until the game ends\n\t\twhile(mySnake.l!=false) {\n\t\t\tMusicPlayer.getMusicPlay(\"src/classHolder/frogger.mp3\");\n\t\t\tThread.sleep(7*1090);\n\t\t\tif(mySnake.l==false){\n\t\t\t\tMusicPlayer.sleep(10000000);\n\t\t\t}\n\t\t}\n\n\n\t}\n\n\t//called for Basic Level && Happy Background\n\tpublic static void playBegins2() throws InterruptedException {\n\t\tchoice = 2;\n\t\tnew Play().loadFrame();\n\t\t//Make music loop until the game ends\n\t\twhile(mySnake.l!=false) {\n\t\t\tMusicPlayer.getMusicPlay(\"src/classHolder/frogger.mp3\");\n\t\t\tThread.sleep(7*1090);\n\t\t\tif(mySnake.l==false){\n\t\t\t\tMusicPlayer.sleep(10000000);\n\t\t\t}\n\n\t\t}\n\t}\n\n\t//called for Advanced Level\n\tpublic static void playBegins3() throws InterruptedException {\n\t\tchoice = 3;\n\t\tnew Play().loadFrame();\n\t\t//Make music loop until the game ends\n\t\twhile(mySnake.l!=false) {\n\t\t\tMusicPlayer.getMusicPlay(\"src/classHolder/frogger.mp3\");\n\t\t\tThread.sleep(7*1090);\n\t\t\tif(mySnake.l==false){\n\t\t\t\tMusicPlayer.sleep(10000000);\n\t\t\t}\n\n\t\t}\n\t}\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/classHolder/Play.java b/src/classHolder/Play.java
+--- a/src/classHolder/Play.java	(revision b47330579b923818631d80c1628c830a9eeb628a)
++++ b/src/classHolder/Play.java	(date 1668032646752)
+@@ -2,6 +2,9 @@
+ import java.awt.*;
+ import java.awt.event.KeyEvent;
+ import java.io.IOException;
++
++/** Called when user clicks Begin button with correct input in StartScreen.
++ * @author Nderon Beqiri-modified */
+ public class Play extends MyFrame
+ {
+ 	private ScoreToFile username = new ScoreToFile();
+@@ -11,9 +14,8 @@
+ 	private ScoreToFile highscore = new ScoreToFile();
+ 	private static int choice;
+ 
+-	private static MySnake mySnake = new MySnake(100, 100);// x , y
+-	private Food food = new Food();
+-
++	public static MySnake mySnake = new MySnake(100, 100);// x , y
++	public static Food food = new Food();
+ 	private Image background = ImageUtil.images.get("UI-background");
+ 	private Image background2 = ImageUtil.images.get("UI-background2");
+ 	private Image extraLevel = ImageUtil.images.get("UI-background3");
+@@ -22,11 +24,28 @@
+ 
+ 	private Image zero = ImageUtil.images.get("lowscore");
+ 
++	Rectangles rec1 = new Rectangles(300,200,25,50);
++	Rectangles rec2 = new Rectangles(500,300,100,150);
++	Rectangles rec3 = new Rectangles(400,100,100,30);
++	Rectangles rec4 = new Rectangles(200,200,15,300);
++
++	Rectangles rec5 = new Rectangles(500,250,200,200);
++	Rectangles rec6 = new Rectangles(230,80,15,325);
++	Rectangles rec7 = new Rectangles(245,262,400,15);
++	Rectangles rec8 = new Rectangles(100,80,400,15);
++	Rectangles rec9 = new Rectangles(630,277,15,200);
++	Rectangles rec10 = new Rectangles(500,40,15,120);
++	Rectangles rec11 = new Rectangles(500,160,275,15);
++	Rectangles rec12 = new Rectangles(760,170,15,310);
++
++
++
+ 	@Override
+ 	public void keyPressed(KeyEvent e)
+ 	{
+ 		super.keyPressed(e);
+ 		mySnake.keyPressed(e);
++
+ 	}
+ 
+ 	@Override
+@@ -39,68 +58,17 @@
+ 			g.drawImage(background, 0, 0, null);
+ 			//drawing obstacles for sky background
+ 			g2D.setPaint(Color.blue);
+-			g2D.drawRect(300,200,25,50);
+-			g2D.fillRect(300,200,25,50);
+-			if((mySnake.x>=295 && mySnake.x<=320)&&(mySnake.y==195)){
+-				mySnake.l=false;
+-			}
+-			if((mySnake.x>=295 && mySnake.x<=320)&&(mySnake.y==245)){
+-				mySnake.l=false;
+-			}
+-			if((mySnake.y>=195 && mySnake.y<=245)&&(mySnake.x==295)){
+-				mySnake.l=false;
+-			}
+-			if((mySnake.y>=195 && mySnake.y<=245)&&(mySnake.x==320)){
+-				mySnake.l=false;
+-			}
++			rec1.paint(g);
+ 
+ 			g2D.setPaint(Color.red);
+-			g2D.drawRect(500,300,100,150);
+-			g2D.fillRect(500,300,100,150);
+-			if((mySnake.x>=495 && mySnake.x<=595)&&(mySnake.y==295)){
+-				mySnake.l=false;
+-			}
+-			if((mySnake.x>=495 && mySnake.x<=595)&&(mySnake.y==445)){
+-				mySnake.l=false;
+-			}
+-			if((mySnake.y>=295 && mySnake.y<=445)&&(mySnake.x==495)){
+-				mySnake.l=false;
+-			}
+-			if((mySnake.y>=295 && mySnake.y<=445)&&(mySnake.x==595)){
+-				mySnake.l=false;
+-			}
++			rec2.paint(g);
+ 
+ 			g2D.setPaint(Color.black);
+-			g2D.drawRect(400,100,100,30);
+-			g2D.fillRect(400,100,100,30);
+-			if((mySnake.x>=395 && mySnake.x<=495)&&(mySnake.y==95)){
+-				mySnake.l=false;
+-			}
+-			if((mySnake.x>=395 && mySnake.x<=495)&&(mySnake.y==125)){
+-				mySnake.l=false;
+-			}
+-			if((mySnake.y>=95 && mySnake.y<=125)&&(mySnake.x==395)){
+-				mySnake.l=false;
+-			}
+-			if((mySnake.y>=95 && mySnake.y<=125)&&(mySnake.x==495)){
+-				mySnake.l=false;
+-			}
++			rec3.paint(g);
+ 
+ 			g2D.setPaint(Color.green);
+-			g2D.drawRect(200,200,15,300);
+-			g2D.fillRect(200,200,15,300);
+-			if((mySnake.x>=195 && mySnake.x<=210)&&(mySnake.y==195)){
+-				mySnake.l=false;
+-			}
+-			if((mySnake.x>=195 && mySnake.x<=210)&&(mySnake.y==195)){
+-				mySnake.l=false;
+-			}
+-			if((mySnake.y>=195 && mySnake.y<=495)&&(mySnake.x==195)){
+-				mySnake.l=false;
+-			}
+-			if((mySnake.y>=195 && mySnake.y<=495)&&(mySnake.x==210)){
+-				mySnake.l=false;
+-			}
++			rec4.paint(g);
++
+ 
+ 		}
+ 
+@@ -121,38 +89,20 @@
+ 
+ 
+ 			//determine boundaries for triangle
+-			if((mySnake.x>=140&&mySnake.x<=150)&&(mySnake.y>=299&&mySnake.y<=301)){
++			if((mySnake.x>=137&&mySnake.x<=145)&&(mySnake.y>=297&&mySnake.y<=301)){
+ 				mySnake.l=false;
+ 			}
+-			if((mySnake.x>=240&&mySnake.x<=260)&&(mySnake.y>=145&&mySnake.y<=155)){
++			if((mySnake.x>=237&&mySnake.x<=245)&&(mySnake.y>=147&&mySnake.y<=154)){
+ 				mySnake.l=false;
+ 			}
+-			if((mySnake.x>=340&&mySnake.x<=360)&&(mySnake.y>=299&&mySnake.y<=301)){
++			if((mySnake.x>=337&&mySnake.x<=345)&&(mySnake.y>=297&&mySnake.y<=301)){
+ 				mySnake.l=false;
+ 			}
+ 
+ 			//draw square obstacle
+ 			g2D.setPaint(Color.pink);
+-			g2D.drawRect(500,250,200,200);
+-			g2D.fillRect(500,250,200,200);
++			rec5.paint(g);
+ 
+-			//determine boundaries for square
+-			if((mySnake.x>=495 && mySnake.x<=695)&&(mySnake.y==245)){
+-				mySnake.l=false;
+-				food.l=false;
+-			}
+-			if((mySnake.x>=495 && mySnake.x<=695)&&(mySnake.y==245)){
+-				mySnake.l=false;
+-				food.l=false;
+-			}
+-			if((mySnake.y>=245 && mySnake.y<=445)&&(mySnake.x==495)){
+-				mySnake.l=false;
+-				food.l=false;
+-			}
+-			if((mySnake.y>=245 && mySnake.y<=445)&&(mySnake.x==695)){
+-				mySnake.l=false;
+-				food.l=false;
+-			}
+ 
+ 
+ 
+@@ -165,113 +115,18 @@
+ 
+ 		//draw Advanced Level Background
+ 		else{
++
+ 			g.drawImage(extraLevel, 0, 0, null);
+ 			//draw rectangles and interlink them, forming a maze
+ 			g2D.setPaint(Color.white);
+-			g2D.drawRect(230,80,15,325);
+-			g2D.fillRect(230,80,15,325);
+-			if((mySnake.x>=225 && mySnake.x<=240)&&(mySnake.y==75)){
+-				mySnake.l=false;
+-			}
+-			if((mySnake.x>=225 && mySnake.x<=240)&&(mySnake.y==75)){
+-				mySnake.l=false;
+-			}
+-			if((mySnake.y>=75 && mySnake.y<=400)&&(mySnake.x==225)){
+-				mySnake.l=false;
+-			}
+-			if((mySnake.y>=75 && mySnake.y<=400)&&(mySnake.x==240)){
+-				mySnake.l=false;
+-			}
+-
+-			g2D.drawRect(245,262,400,15);
+-			g2D.fillRect(245,262,400,15);
+-			if((mySnake.x>=225 && mySnake.x<=640)&&(mySnake.y>=247&&mySnake.y<=262)){
+-				mySnake.l=false;
+-			}
+-			if((mySnake.x>=240 && mySnake.x<=640)&&(mySnake.y==257&&mySnake.y<=262)){
+-				mySnake.l=false;
+-			}
+-			if((mySnake.y>=257 && mySnake.y<=272)&&(mySnake.x==240)){
+-				mySnake.l=false;
+-			}
+-			if((mySnake.y>=257 && mySnake.y<=272)&&(mySnake.x==640)){
+-				mySnake.l=false;
+-			}
++			rec6.paint(g);
++			rec7.paint(g);
++			rec8.paint(g);
++			rec9.paint(g);
++			rec10.paint(g);
++			rec11.paint(g);
++			rec12.paint(g);
+ 
+-			g2D.drawRect(100,80,400,15);
+-			g2D.fillRect(100,80,400,15);
+-			if((mySnake.x>=95 && mySnake.x<=495)&&(mySnake.y==75)){
+-				mySnake.l=false;
+-			}
+-			if((mySnake.x>=95 && mySnake.x<=495)&&(mySnake.y==90)){
+-				mySnake.l=false;
+-			}
+-			if((mySnake.y>=75 && mySnake.y<=90)&&(mySnake.x==95)){
+-				mySnake.l=false;
+-			}
+-			if((mySnake.y>=75 && mySnake.y<=90)&&(mySnake.x==495)){
+-				mySnake.l=false;
+-			}
+-
+-			g2D.drawRect(630,277,15,200);
+-			g2D.fillRect(630,277,15,200);
+-			if((mySnake.x>=625 && mySnake.x<=640)&&(mySnake.y==272)){
+-				mySnake.l=false;
+-			}
+-			if((mySnake.x>=625 && mySnake.x<=640)&&(mySnake.y==472)){
+-				mySnake.l=false;
+-			}
+-			if((mySnake.y>=272 && mySnake.y<=472)&&(mySnake.x==625)){
+-				mySnake.l=false;
+-			}
+-			if((mySnake.y>=272 && mySnake.y<=472)&&(mySnake.x==640)){
+-				mySnake.l=false;
+-			}
+-
+-			g2D.drawRect(500,40,15,120);
+-			g2D.fillRect(500,40,15,120);
+-			if((mySnake.x>=495 && mySnake.x<=510)&&(mySnake.y==35)){
+-				mySnake.l=false;
+-			}
+-			if((mySnake.x>=495 && mySnake.x<=510)&&(mySnake.y==155)){
+-				mySnake.l=false;
+-			}
+-			if((mySnake.y>=35 && mySnake.y<=155)&&(mySnake.x==495)){
+-				mySnake.l=false;
+-			}
+-			if((mySnake.y>=35 && mySnake.y<=155)&&(mySnake.x==510)){
+-				mySnake.l=false;
+-			}
+-
+-			g2D.drawRect(500,160,275,15);
+-			g2D.fillRect(500,160,275,15);
+-			if((mySnake.x>=495 && mySnake.x<=770)&&(mySnake.y==155)){
+-				mySnake.l=false;
+-			}
+-			if((mySnake.x>=495 && mySnake.x<=770)&&(mySnake.y==170)){
+-				mySnake.l=false;
+-			}
+-			if((mySnake.y>=155 && mySnake.y<=170)&&(mySnake.x==495)){
+-				mySnake.l=false;
+-			}
+-			if((mySnake.y>=155 && mySnake.y<=170)&&(mySnake.x==670)){
+-				mySnake.l=false;
+-			}
+-
+-			g2D.drawRect(760,170,15,310);
+-			g2D.fillRect(760,170,15,310);
+-			if((mySnake.x>=755 && mySnake.x<=770)&&(mySnake.y==165)){
+-				mySnake.l=false;
+-			}
+-			if((mySnake.x>=755 && mySnake.x<=770)&&(mySnake.y==475)){
+-				mySnake.l=false;
+-			}
+-			if((mySnake.y>=165 && mySnake.y<=475)&&(mySnake.x==755)){
+-				mySnake.l=false;
+-			}
+-			if((mySnake.y>=165 && mySnake.y<=475)&&(mySnake.x==770)){
+-				mySnake.l=false;
+-			}
+ 
+ 
+ 		}
+@@ -280,7 +135,25 @@
+ 		//if snake is true
+ 		if (mySnake.l)
+ 		{
++			if(choice==0) {
++				rec1.boundaries();
++				rec2.boundaries();
++				rec3.boundaries();
++				rec4.boundaries();
+ 
++			}
++			if(choice==2){
++				rec5.boundaries();
++			}
++			if(choice==3) {
++				rec6.boundaries();
++				rec7.boundaries();
++				rec8.boundaries();
++				rec9.boundaries();
++				rec10.boundaries();
++				rec11.boundaries();
++				rec12.boundaries();
++			}
+ 			//draw snake
+ 			mySnake.draw(g);
+ 			//if food is true
+@@ -319,7 +192,7 @@
+ 
+ 	}
+ 
+-	//display current score on the top left
++	/**Displays current score on top left of screen*/
+ 	public void drawScore(Graphics g)
+ 	{
+ 		g.setFont(new Font(Font.SANS_SERIF, Font.BOLD, 20));
+@@ -327,7 +200,7 @@
+ 		g.drawString("SCORE : " + mySnake.score, 20, 40);
+ 	}
+ 
+-	//display final score in center, above end image
++	/**Displays final score in center, above end image*/
+ 	public void drawFinalScore(Graphics g)
+ 	{
+ 		//Sky Background final score
+@@ -383,13 +256,13 @@
+ 
+ 	}
+ 
+-	//called for Basic Level && Sky Background
+-	public static void playBegins() throws InterruptedException, IOException {
++	/**Starts game for Basic Level Sky Background*/
++	public static void playBegins() throws InterruptedException {
+ 		new Play().loadFrame();
+ 		//Make music loop until the game ends
+ 		while(mySnake.l!=false) {
+ 			MusicPlayer.getMusicPlay("src/classHolder/frogger.mp3");
+-			Thread.sleep(7*1090);
++			Thread.sleep(7*1190);
+ 			if(mySnake.l==false){
+ 				MusicPlayer.sleep(10000000);
+ 			}
+@@ -398,14 +271,14 @@
+ 
+ 	}
+ 
+-	//called for Basic Level && Happy Background
++	/**Starts game for Basic Level Happy Background*/
+ 	public static void playBegins2() throws InterruptedException {
+ 		choice = 2;
+ 		new Play().loadFrame();
+ 		//Make music loop until the game ends
+ 		while(mySnake.l!=false) {
+ 			MusicPlayer.getMusicPlay("src/classHolder/frogger.mp3");
+-			Thread.sleep(7*1090);
++			Thread.sleep(7*1190);
+ 			if(mySnake.l==false){
+ 				MusicPlayer.sleep(10000000);
+ 			}
+@@ -413,14 +286,14 @@
+ 		}
+ 	}
+ 
+-	//called for Advanced Level
++	/**Starts game for Advanced Level*/
+ 	public static void playBegins3() throws InterruptedException {
+ 		choice = 3;
+ 		new Play().loadFrame();
+ 		//Make music loop until the game ends
+ 		while(mySnake.l!=false) {
+ 			MusicPlayer.getMusicPlay("src/classHolder/frogger.mp3");
+-			Thread.sleep(7*1090);
++			Thread.sleep(7*1190);
+ 			if(mySnake.l==false){
+ 				MusicPlayer.sleep(10000000);
+ 			}
+Index: src/classHolder/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package classHolder;\n\n\nimport javafx.application.Application;\nimport javafx.fxml.FXMLLoader;\nimport javafx.scene.Parent;\nimport javafx.scene.Scene;\nimport javafx.scene.image.Image;\nimport javafx.stage.Stage;\nimport java.io.IOException;\n\n\n\npublic class Main extends Application {\n\n    @Override\n    public void start(Stage stage) throws IOException {\n        Image icon = new Image(getClass().getResourceAsStream(\"snake-logo.png\"));\n        Parent root = FXMLLoader.load(getClass().getResource(\"displayScores.fxml\"));\n        Scene scene = new Scene(root);\n        stage.setScene(scene);\n        //set icon of Start screen to snake logo\n        stage.getIcons().add(icon);\n        //Set title of Start screen to Snakee Yipee\n        stage.setTitle(\"Snakee Yipee\");\n        stage.show();\n    }\n\n\n    //loads up Start Screen\n    public static void main(String[] args) {\n        launch(args);\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/classHolder/Main.java b/src/classHolder/Main.java
+--- a/src/classHolder/Main.java	(revision b47330579b923818631d80c1628c830a9eeb628a)
++++ b/src/classHolder/Main.java	(date 1667924467257)
+@@ -1,6 +1,4 @@
+ package classHolder;
+-
+-
+ import javafx.application.Application;
+ import javafx.fxml.FXMLLoader;
+ import javafx.scene.Parent;
+@@ -10,9 +8,11 @@
+ import java.io.IOException;
+ 
+ 
+-
++/** First class called when program is run
++ * @author Nderon Beqiri */
+ public class Main extends Application {
+ 
++    /**Creation of stage, showing displayScores.fxml file*/
+     @Override
+     public void start(Stage stage) throws IOException {
+         Image icon = new Image(getClass().getResourceAsStream("snake-logo.png"));
+@@ -27,8 +27,8 @@
+     }
+ 
+ 
+-    //loads up Start Screen
++    /**First method executed in program, loading up stage*/
+     public static void main(String[] args) {
+         launch(args);
+     }
+-}
+\ No newline at end of file
++}
+Index: target/classes/com/example/snake/main.fxml
+===================================================================
+diff --git a/target/classes/com/example/snake/main.fxml b/target/classes/com/example/snake/main.fxml
+deleted file mode 100644
+--- a/target/classes/com/example/snake/main.fxml	(revision b47330579b923818631d80c1628c830a9eeb628a)
++++ /dev/null	(revision b47330579b923818631d80c1628c830a9eeb628a)
+@@ -1,48 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-
+-<?import javafx.scene.control.Button?>
+-<?import javafx.scene.control.ColorPicker?>
+-<?import javafx.scene.control.Label?>
+-<?import javafx.scene.control.TextField?>
+-<?import javafx.scene.image.Image?>
+-<?import javafx.scene.image.ImageView?>
+-<?import javafx.scene.layout.AnchorPane?>
+-<?import javafx.scene.text.Font?>
+-
+-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cwplayground.Scene1">
+-   <children>
+-      <ImageView fx:id="myImageView" fitHeight="400.0" fitWidth="600.0" pickOnBounds="true">
+-         <image>
+-            <Image url="@startScreenSnake.png" />
+-         </image>
+-      </ImageView>
+-      <Button layoutX="102.0" layoutY="294.0" mnemonicParsing="false" onAction="#displayImage2" text="Sky Background" />
+-      <Button layoutX="102.0" layoutY="336.0" mnemonicParsing="false" onAction="#displayImage" text="Happy Background" />
+-      <Label layoutX="95.0" layoutY="63.0" text="Snake" textFill="#db0000">
+-         <font>
+-            <Font name="Bauhaus 93" size="50.0" />
+-         </font>
+-      </Label>
+-      <Label layoutX="100.0" layoutY="121.0" text="Select a background, gamemode, and colour to play">
+-         <font>
+-            <Font name="Bauhaus 93" size="14.0" />
+-         </font>
+-      </Label>
+-      <Button layoutX="100.0" layoutY="210.0" mnemonicParsing="false" onAction="#playSingle" text="Single Player" />
+-      <Button layoutX="102.0" layoutY="253.0" mnemonicParsing="false" onAction="#playMulti" text="Multi Player" />
+-      <ColorPicker layoutX="98.0" layoutY="164.0" onAction="#pickColor" />
+-      <TextField fx:id="nameTextField" layoutX="293.0" layoutY="253.0" />
+-      <Label layoutX="230.0" layoutY="257.0" text="username">
+-         <font>
+-            <Font name="Bauhaus 93" size="14.0" />
+-         </font>
+-      </Label>
+-      <Button layoutX="342.0" layoutY="294.0" mnemonicParsing="false" onAction="#beginGame" text="Begin" />
+-      <Label layoutX="9.0" layoutY="378.0" text="ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss">
+-         <font>
+-            <Font size="10.0" />
+-         </font>
+-      </Label>
+-      <Label layoutY="5.0" text="ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss" />
+-   </children>
+-</AnchorPane>
+Index: target/classes/com/example/snake/endFacts.fxml
+===================================================================
+diff --git a/target/classes/com/example/snake/endFacts.fxml b/target/classes/com/example/snake/endFacts.fxml
+deleted file mode 100644
+--- a/target/classes/com/example/snake/endFacts.fxml	(revision b47330579b923818631d80c1628c830a9eeb628a)
++++ /dev/null	(revision b47330579b923818631d80c1628c830a9eeb628a)
+@@ -1,28 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-
+-<?import javafx.scene.control.Label?>
+-<?import javafx.scene.image.Image?>
+-<?import javafx.scene.image.ImageView?>
+-<?import javafx.scene.layout.AnchorPane?>
+-<?import javafx.scene.text.Font?>
+-
+-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.cwplayground.Scene2">
+-   <children>
+-      <ImageView fitHeight="400.0" fitWidth="600.0" pickOnBounds="true">
+-         <image>
+-            <Image url="@startScreenSnake.png" />
+-         </image>
+-      </ImageView>
+-       
+-      <Label fx:id="nameLabel" layoutX="91.0" layoutY="142.0" text="Well Played">
+-         <font>
+-            <Font name="Bauhaus 93" size="36.0" />
+-         </font>
+-      </Label>
+-      <Label layoutX="92.0" layoutY="69.0" text="Snake" textFill="#db0000">
+-         <font>
+-            <Font name="Bauhaus 93" size="50.0" />
+-         </font>
+-      </Label>
+-   </children>
+-</AnchorPane>
+Index: src/Tests/MyFrameTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Tests/MyFrameTest.java b/src/Tests/MyFrameTest.java
+new file mode 100644
+--- /dev/null	(date 1667930181107)
++++ b/src/Tests/MyFrameTest.java	(date 1667930181107)
+@@ -0,0 +1,17 @@
++package Tests;
++
++import classHolder.MyFrame;
++import org.junit.jupiter.api.Test;
++
++import static junit.framework.Assert.assertTrue;
++class MyFrameTest {
++
++    @Test
++    void loadFrame() {
++        var frame = new MyFrame();
++        assertTrue(frame.loadFrame());
++
++    }
++
++
++}
+\ No newline at end of file
+Index: src/classHolder/movable.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package classHolder;\npublic interface movable\n{\n\tvoid move();\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/classHolder/movable.java b/src/classHolder/movable.java
+--- a/src/classHolder/movable.java	(revision b47330579b923818631d80c1628c830a9eeb628a)
++++ b/src/classHolder/movable.java	(date 1667924475260)
+@@ -1,5 +1,8 @@
+ package classHolder;
++/** Can be called by any class but not instantiated
++ * @author Nderon Beqiri-modified */
+ public interface movable
+ {
++	/**Method can be called by subclass and altered*/
+ 	void move();
+ }
+Index: Snake.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<module type=\"JAVA_MODULE\" version=\"4\">\n  <component name=\"NewModuleRootManager\" inherit-compiler-output=\"true\">\n    <exclude-output />\n    <content url=\"file://$MODULE_DIR$\">\n      <sourceFolder url=\"file://$MODULE_DIR$/src\" isTestSource=\"false\" />\n    </content>\n    <orderEntry type=\"inheritedJdk\" />\n    <orderEntry type=\"sourceFolder\" forTests=\"false\" />\n    <orderEntry type=\"library\" name=\"googlecode.soundlibs.jlayer\" level=\"project\" />\n    <orderEntry type=\"library\" name=\"lib\" level=\"project\" />\n    <orderEntry type=\"library\" name=\"lib1\" level=\"project\" />\n  </component>\n</module>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Snake.iml b/Snake.iml
+--- a/Snake.iml	(revision b47330579b923818631d80c1628c830a9eeb628a)
++++ b/Snake.iml	(date 1667761819762)
+@@ -10,5 +10,22 @@
+     <orderEntry type="library" name="googlecode.soundlibs.jlayer" level="project" />
+     <orderEntry type="library" name="lib" level="project" />
+     <orderEntry type="library" name="lib1" level="project" />
++    <orderEntry type="module-library" exported="">
++      <library name="JUnit5.8.1">
++        <CLASSES>
++          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter/5.8.1/junit-jupiter-5.8.1.jar!/" />
++          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-api/5.8.1/junit-jupiter-api-5.8.1.jar!/" />
++          <root url="jar://$MAVEN_REPOSITORY$/org/opentest4j/opentest4j/1.2.0/opentest4j-1.2.0.jar!/" />
++          <root url="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-commons/1.8.1/junit-platform-commons-1.8.1.jar!/" />
++          <root url="jar://$MAVEN_REPOSITORY$/org/apiguardian/apiguardian-api/1.1.2/apiguardian-api-1.1.2.jar!/" />
++          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-params/5.8.1/junit-jupiter-params-5.8.1.jar!/" />
++          <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-engine/5.8.1/junit-jupiter-engine-5.8.1.jar!/" />
++          <root url="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-engine/1.8.1/junit-platform-engine-1.8.1.jar!/" />
++          <root url="jar://$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-commons/1.8.2/junit-platform-commons-1.8.2.jar!/" />
++        </CLASSES>
++        <JAVADOC />
++        <SOURCES />
++      </library>
++    </orderEntry>
+   </component>
+ </module>
+\ No newline at end of file
+Index: src/classHolder/AllTimeScores.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package classHolder;\n\nimport javafx.application.Platform;\nimport javafx.event.ActionEvent;\nimport javafx.fxml.FXML;\nimport javafx.fxml.FXMLLoader;\nimport javafx.fxml.Initializable;\nimport javafx.scene.Node;\nimport javafx.scene.Parent;\nimport javafx.scene.Scene;\nimport javafx.scene.control.TextArea;\nimport javafx.scene.input.MouseEvent;\nimport javafx.stage.Stage;\n\nimport java.io.File;\nimport java.io.FileNotFoundException;\nimport java.io.IOException;\nimport java.net.URL;\nimport java.util.ResourceBundle;\nimport java.util.Scanner;\n\npublic class AllTimeScores implements Initializable {\n\n    private Parent root;\n    private Stage stage;\n    private Scene scene;\n\n    //text area will display file contents\n    @FXML\n    private TextArea textArea;\n\n    //if user clicks exit button, application closes\n    @FXML\n    void exitButton(MouseEvent event) {\n        Platform.exit();\n    }\n\n    //if user clicks reset button, they will be redirected to the Start Screen\n    public void resetButton(ActionEvent e) throws IOException {\n        root = FXMLLoader.load(getClass().getResource(\"main.fxml\"));\n        stage=(Stage)((Node)e.getSource()).getScene().getWindow();\n        scene = new Scene(root);\n        stage.setScene(scene);\n        stage.show();\n    }\n\n    @Override\n    public void initialize(URL url, ResourceBundle rb) {\n        try {\n            //read file AllTimeScores\n            Scanner s = new Scanner(new File(\"AllTimeScores.txt\")).useDelimiter(\"\\\\s+\");\n            while (s.hasNext()) {\n                //if integer variable, 2 new lines\n                if (s.hasNextInt()) { // check if next token is an int\n                    textArea.appendText(s.nextInt() + \" \"+\"\\n\"+\"\\n\"); // display the found integer\n\n                } else {\n                    //if string variable, one new line\n                    textArea.appendText(s.next() + \" \"+\"\\n\"); // else read the next token\n                }\n            }\n        } catch (FileNotFoundException ex) {\n            System.err.println(ex);\n        }\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/classHolder/AllTimeScores.java b/src/classHolder/AllTimeScores.java
+--- a/src/classHolder/AllTimeScores.java	(revision b47330579b923818631d80c1628c830a9eeb628a)
++++ b/src/classHolder/AllTimeScores.java	(date 1667924414476)
+@@ -1,5 +1,4 @@
+ package classHolder;
+-
+ import javafx.application.Platform;
+ import javafx.event.ActionEvent;
+ import javafx.fxml.FXML;
+@@ -19,8 +18,14 @@
+ import java.util.ResourceBundle;
+ import java.util.Scanner;
+ 
++/**First class called by main, initial screen showing displayscores.fxml file.
++ * Displays updated all time score list each time program is run.
++ * Contains button that allows to go to start screen.
++ * Contains button that allows to exit.
++ * @author Nderon Beqiri */
+ public class AllTimeScores implements Initializable {
+ 
++
+     private Parent root;
+     private Stage stage;
+     private Scene scene;
+@@ -29,13 +34,13 @@
+     @FXML
+     private TextArea textArea;
+ 
+-    //if user clicks exit button, application closes
++    /**User can exit by clicking button*/
+     @FXML
+     void exitButton(MouseEvent event) {
+         Platform.exit();
+     }
+ 
+-    //if user clicks reset button, they will be redirected to the Start Screen
++    /**User can reset by clicking button*/
+     public void resetButton(ActionEvent e) throws IOException {
+         root = FXMLLoader.load(getClass().getResource("main.fxml"));
+         stage=(Stage)((Node)e.getSource()).getScene().getWindow();
+@@ -44,6 +49,7 @@
+         stage.show();
+     }
+ 
++    /**Append names and scores stored in file to textarea*/
+     @Override
+     public void initialize(URL url, ResourceBundle rb) {
+         try {
+Index: src/classHolder/package-info.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/classHolder/package-info.java b/src/classHolder/package-info.java
+new file mode 100644
+--- /dev/null	(date 1667922191728)
++++ b/src/classHolder/package-info.java	(date 1667922191728)
+@@ -0,0 +1,3 @@
++/**Contains all classes required to run code
++ * @author Nderon Beqiri */
++package classHolder;
+Index: src/classHolder/GameUtil.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package classHolder;\n\nimport java.awt.Graphics2D;\nimport java.awt.Image;\nimport java.awt.RenderingHints;\nimport java.awt.image.BufferedImage;\nimport java.net.URL;\n\nimport javax.imageio.ImageIO;\n\npublic class GameUtil\n{\n\tpublic static Image getImage(String imagePath)\n\t{\n\t\tURL u = GameUtil.class.getClassLoader().getResource(imagePath);\n\t\tBufferedImage i = null;\n\t\ttry\n\t\t{\n\t\t\ti = ImageIO.read(u);\n\t\t} catch (Exception e)\n\t\t{\n\t\t\tSystem.err.println(\"Error!\\n\");\n\t\t\te.printStackTrace();\n\t\t}\n\n\t\treturn i;\n\t}\n\n\tpublic static Image rotateImage(final BufferedImage bufferedImage, final int degree)\n\t{\n\tint w = bufferedImage.getWidth();\n\tint h = bufferedImage.getHeight();\n\tint t = bufferedImage.getColorModel().getTransparency();\n\n\tBufferedImage i;\n\tGraphics2D graphics2d;\n\n\t(graphics2d = (i = new BufferedImage(w, h, t)).createGraphics()).setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);\n\n\tgraphics2d.rotate(Math.toRadians(degree), w / 2, h / 2);\n\tgraphics2d.drawImage(bufferedImage, 0, 0, null);\n\tgraphics2d.dispose();\n\n\treturn i;\n\n\t}\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/classHolder/GameUtil.java b/src/classHolder/GameUtil.java
+--- a/src/classHolder/GameUtil.java	(revision b47330579b923818631d80c1628c830a9eeb628a)
++++ b/src/classHolder/GameUtil.java	(date 1667924446425)
+@@ -1,5 +1,4 @@
+ package classHolder;
+-
+ import java.awt.Graphics2D;
+ import java.awt.Image;
+ import java.awt.RenderingHints;
+@@ -8,8 +7,11 @@
+ 
+ import javax.imageio.ImageIO;
+ 
++/** Manipulates images
++ * @author Nderon Beqiri-modified */
+ public class GameUtil
+ {
++	/**Gets the image that is passed as parameter*/
+ 	public static Image getImage(String imagePath)
+ 	{
+ 		URL u = GameUtil.class.getClassLoader().getResource(imagePath);
+@@ -26,22 +28,23 @@
+ 		return i;
+ 	}
+ 
++	/**Rotates the image as user will change directions in-game*/
+ 	public static Image rotateImage(final BufferedImage bufferedImage, final int degree)
+ 	{
+-	int w = bufferedImage.getWidth();
+-	int h = bufferedImage.getHeight();
+-	int t = bufferedImage.getColorModel().getTransparency();
++		int w = bufferedImage.getWidth();
++		int h = bufferedImage.getHeight();
++		int t = bufferedImage.getColorModel().getTransparency();
+ 
+-	BufferedImage i;
+-	Graphics2D graphics2d;
++		BufferedImage i;
++		Graphics2D graphics2d;
+ 
+-	(graphics2d = (i = new BufferedImage(w, h, t)).createGraphics()).setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
++		(graphics2d = (i = new BufferedImage(w, h, t)).createGraphics()).setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+ 
+-	graphics2d.rotate(Math.toRadians(degree), w / 2, h / 2);
+-	graphics2d.drawImage(bufferedImage, 0, 0, null);
+-	graphics2d.dispose();
++		graphics2d.rotate(Math.toRadians(degree), w / 2, h / 2);
++		graphics2d.drawImage(bufferedImage, 0, 0, null);
++		graphics2d.dispose();
+ 
+-	return i;
++		return i;
+ 
+ 	}
+ }
+Index: src/classHolder/ImageUtil.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package classHolder;\n\nimport java.awt.Image;\nimport java.util.HashMap;\nimport java.util.Map;\n\npublic class ImageUtil\n{\n\tpublic static Map<String, Image> images = new HashMap<>();\n\n\tstatic\n\t{\n\t\t// snake\n\t\timages.put(\"snake-head-right\", GameUtil.getImage(\"classHolder/snake-head-right.png\"));\n\t\timages.put(\"snake-head-right-red\", GameUtil.getImage(\"classHolder/snake-head-right-red.png\"));\n\t\timages.put(\"snake-body\", GameUtil.getImage(\"classHolder/snake-body.png\"));\n\t\timages.put(\"snake-body-red\", GameUtil.getImage(\"classHolder/snake-body-red.png\"));\n\t\t// food\n\t\timages.put(\"0\", GameUtil.getImage(\"classHolder/food-kiwi.png\"));\n\t\timages.put(\"1\", GameUtil.getImage(\"classHolder/food-lemon.png\"));\n\t\timages.put(\"2\", GameUtil.getImage(\"classHolder/food-litchi.png\"));\n\t\timages.put(\"3\", GameUtil.getImage(\"classHolder/food-mango.png\"));\n\t\timages.put(\"4\", GameUtil.getImage(\"classHolder/food-apple.png\"));\n\t\timages.put(\"5\", GameUtil.getImage(\"classHolder/food-banana.png\"));\n\t\timages.put(\"6\", GameUtil.getImage(\"classHolder/food-blueberry.png\"));\n\t\timages.put(\"7\", GameUtil.getImage(\"classHolder/food-cherry.png\"));\n\t\timages.put(\"8\", GameUtil.getImage(\"classHolder/food-durian.png\"));\n\t\timages.put(\"9\", GameUtil.getImage(\"classHolder/food-grape.png\"));\n\t\timages.put(\"10\", GameUtil.getImage(\"classHolder/food-grapefruit.png\"));\n\t\timages.put(\"11\", GameUtil.getImage(\"classHolder/food-peach.png\"));\n\t\timages.put(\"12\", GameUtil.getImage(\"classHolder/food-pear.png\"));\n\t\timages.put(\"13\", GameUtil.getImage(\"classHolder/food-orange.png\"));\n\t\timages.put(\"14\", GameUtil.getImage(\"classHolder/food-pineapple.png\"));\n\t\timages.put(\"15\", GameUtil.getImage(\"classHolder/food-strawberry.png\"));\n\t\timages.put(\"16\", GameUtil.getImage(\"classHolder/food-watermelon.png\"));\n\t\t//backgrounds\n\t\timages.put(\"UI-background\", GameUtil.getImage(\"classHolder/UI-background.png\"));\n\t\timages.put(\"UI-background2\", GameUtil.getImage(\"classHolder/UI-background2.png\"));\n\t\timages.put(\"UI-background3\", GameUtil.getImage(\"classHolder/UI-background3.png\"));\n\t\t//if game ends and user gets score above 0\n\t\timages.put(\"game-scene-01\", GameUtil.getImage(\"classHolder/game-scene-01.jpg\"));\n\t\t//if user achieves score of 0\n\t\timages.put(\"lowscore\", GameUtil.getImage(\"classHolder/lowscore.png\"));\n\t}\n}\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/classHolder/ImageUtil.java b/src/classHolder/ImageUtil.java
+--- a/src/classHolder/ImageUtil.java	(revision b47330579b923818631d80c1628c830a9eeb628a)
++++ b/src/classHolder/ImageUtil.java	(date 1667924456725)
+@@ -1,11 +1,13 @@
+ package classHolder;
+-
+ import java.awt.Image;
+ import java.util.HashMap;
+ import java.util.Map;
+ 
++/** Determines how images will be referenced in code for simplicity
++ * @author Nderon Beqiri-modified */
+ public class ImageUtil
+ {
++	/**Maps key (image), to value (name of path)*/
+ 	public static Map<String, Image> images = new HashMap<>();
+ 
+ 	static
+@@ -44,3 +46,4 @@
+ 	}
+ }
+ 
++
+Index: src/classHolder/ErrorScreen.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package classHolder;\n\nimport javafx.application.Platform;\nimport javafx.event.ActionEvent;\nimport javafx.fxml.FXML;\nimport javafx.fxml.FXMLLoader;\nimport javafx.scene.Node;\nimport javafx.scene.Parent;\nimport javafx.scene.Scene;\nimport javafx.scene.control.Label;\nimport javafx.stage.Stage;\nimport java.io.IOException;\n\npublic class ErrorScreen {\n    @FXML\n    private Label nameLabel;\n\n    private Stage stage;\n\n    private Scene scene;\n\n    private Parent root;\n\n\n\n    //displays message with player named if wrong credentials have been entered in Scene 1\n    public void displayError() {\n        nameLabel.setText(\"You didn't select a valid option\");\n    }\n    //closes stage\n    public void exitButton() {\n        Platform.exit();\n\n    }\n    //switches back to Scene 1 (main.fxml)\n    public void resetButton(ActionEvent e) throws IOException {\n        root = FXMLLoader.load(getClass().getResource(\"main.fxml\"));\n        stage=(Stage)((Node)e.getSource()).getScene().getWindow();\n        scene = new Scene(root);\n        stage.setScene(scene);\n        stage.show();\n    }\n\n\n}\n\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/classHolder/ErrorScreen.java b/src/classHolder/ErrorScreen.java
+--- a/src/classHolder/ErrorScreen.java	(revision b47330579b923818631d80c1628c830a9eeb628a)
++++ b/src/classHolder/ErrorScreen.java	(date 1667924427406)
+@@ -1,5 +1,5 @@
++
+ package classHolder;
+-
+ import javafx.application.Platform;
+ import javafx.event.ActionEvent;
+ import javafx.fxml.FXML;
+@@ -10,8 +10,16 @@
+ import javafx.scene.control.Label;
+ import javafx.stage.Stage;
+ import java.io.IOException;
++/** Called when user input in Start Screen is wrong.
++ * Displays errorEntry.fxml file.
++ * Tells the user what they have entered is wrong.
++ * Contains reset button for going back to StartScreen.
++ * Contains exit button.
++ * @author Nderon Beqiri */
++
+ 
+ public class ErrorScreen {
++
+     @FXML
+     private Label nameLabel;
+ 
+@@ -23,16 +31,16 @@
+ 
+ 
+ 
+-    //displays message with player named if wrong credentials have been entered in Scene 1
++    /**Displays error message if user input in StartScreen is wrong*/
+     public void displayError() {
+         nameLabel.setText("You didn't select a valid option");
+     }
+-    //closes stage
++    /**Button that allows user to exit program*/
+     public void exitButton() {
+         Platform.exit();
+ 
+     }
+-    //switches back to Scene 1 (main.fxml)
++    /**Button that allows user to go back to StartScreen*/
+     public void resetButton(ActionEvent e) throws IOException {
+         root = FXMLLoader.load(getClass().getResource("main.fxml"));
+         stage=(Stage)((Node)e.getSource()).getScene().getWindow();
+@@ -44,4 +52,3 @@
+ 
+ }
+ 
+-
+Index: AllTimeScores.txt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>Scores:\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/AllTimeScores.txt b/AllTimeScores.txt
+--- a/AllTimeScores.txt	(revision b47330579b923818631d80c1628c830a9eeb628a)
++++ b/AllTimeScores.txt	(date 1668032630897)
+@@ -1,1 +1,104 @@
+ Scores:
++Nderon
++2000
++
++
++Nderon2
++1000
++
++Nderon3
++500
++
++zero
++0
++
++we
++we
++we
++we
++we
++we
++0
++
++sd
++0
++
++we
++0
++
++WE
++0
++
++weewe
++0
++
++we
++0
++
++wd
++0
++
++we
++0
++
++we
++0
++
++sd
++0
++
++we
++0
++
++we
++0
++
++we
++500
++
++we
++we
++0
++
++we
++500
++
++we
++0
++
++sc
++0
++
++we
++0
++
++we
++0
++
++we
++500
++
++we
++0
++
++we
++0
++
++sd
++0
++
++qwe
++0
++
++sd
++0
++
++wwe
++1500
++
++we
++0
++
++we
++1000
++
+Index: src/classHolder/ScoreToFile.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package classHolder;\nimport java.io.*;\n\npublic class ScoreToFile {\n    private static String username;\n\n    //append final score achieved to file\n    public void addToHighScore(int score) throws IOException {\n        FileWriter fw = null;\n        BufferedWriter bw = null;\n        PrintWriter pw = null;\n        try {\n            try {\n                //append score to file\n                fw = new FileWriter(\"AllTimeScores.txt\", true);\n                bw = new BufferedWriter(fw);\n                pw = new PrintWriter(bw);\n                pw.println(score);\n                pw.flush();\n                //add new line before each entry for clarity\n                bw.write(\"\\n\");\n            } finally {\n                try {\n                    pw.close();\n                    bw.close();\n                    fw.close();\n                } catch (IOException io) {\n                }\n            }\n        } finally {\n\n        }\n    }\n\n    //append name entered in Start screen to file\n    public void addNameToHighScore(String name) throws IOException {\n        username=name;\n        FileWriter fw = null;\n        BufferedWriter bw = null;\n        PrintWriter pw = null;\n        try {\n            try {\n                //append username to file\n                fw = new FileWriter(\"AllTimeScores.txt\", true);\n                bw = new BufferedWriter(fw);\n                pw = new PrintWriter(bw);\n                pw.println(name);\n                pw.flush();\n            } finally {\n                try {\n                    pw.close();\n                    bw.close();\n                    fw.close();\n                } catch (IOException io) {\n                }\n            }\n        } finally {\n\n        }\n    }\n\n    //allows other classes to access username entered in Start screen\n    public String getUsername(){\n        return username;\n    }\n\n\n}\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/classHolder/ScoreToFile.java b/src/classHolder/ScoreToFile.java
+--- a/src/classHolder/ScoreToFile.java	(revision b47330579b923818631d80c1628c830a9eeb628a)
++++ b/src/classHolder/ScoreToFile.java	(date 1667924550582)
+@@ -1,10 +1,12 @@
+ package classHolder;
+ import java.io.*;
+ 
++/** Stores username and score to file.
++ * @author Nderon Beqiri */
+ public class ScoreToFile {
+     private static String username;
+ 
+-    //append final score achieved to file
++    /**Appends final score achieved to file*/
+     public void addToHighScore(int score) throws IOException {
+         FileWriter fw = null;
+         BufferedWriter bw = null;
+@@ -32,7 +34,7 @@
+         }
+     }
+ 
+-    //append name entered in Start screen to file
++    /**Appends name entered in Start screen to file*/
+     public void addNameToHighScore(String name) throws IOException {
+         username=name;
+         FileWriter fw = null;
+@@ -59,7 +61,7 @@
+         }
+     }
+ 
+-    //allows other classes to access username entered in Start screen
++    /**Allows other classes to access username entered in Start screen*/
+     public String getUsername(){
+         return username;
+     }
+Index: src/classHolder/MusicPlayer.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package classHolder;\n\nimport java.io.BufferedInputStream;\nimport java.io.FileInputStream;\nimport javazoom.jl.player.Player;\n\npublic class MusicPlayer extends Thread\n{\n\tprivate String filename;\n\tprivate Player player;\n\n\tpublic MusicPlayer(String filename)\n\t{\n\t\tthis.filename = filename;\n\t}\n\n\tpublic void play()\n\t{\n\t\tnew Thread()\n\t\t{\n\t\t\t@Override\n\t\t\tpublic void run()\n\t\t\t{\n\t\t\t\tsuper.run();\n\t\t\t\ttry\n\t\t\t\t{\n\t\t\t\t\t//BufferedInputStream buffer = new BufferedInputStream(new FileInputStream(filename));\n\t\t\t\t\tplayer = new Player(new BufferedInputStream(new FileInputStream(filename)));\n\t\t\t\t\tplayer.play();\n\n\t\t\t\t} catch (Exception e)\n\t\t\t\t{\n\t\t\t\t\tSystem.out.println(e);\n\t\t\t\t}\n\t\t\t}\n\t\t}.start();\n\t}\n\n\n\n\t//plays music file which is passed as argument to function\n\tpublic static void getMusicPlay(String filename)\n\t{\n\t\tMusicPlayer musicPlayer = new MusicPlayer(filename);\n\t\tmusicPlayer.play();\n\n\t}\n\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/classHolder/MusicPlayer.java b/src/classHolder/MusicPlayer.java
+--- a/src/classHolder/MusicPlayer.java	(revision b47330579b923818631d80c1628c830a9eeb628a)
++++ b/src/classHolder/MusicPlayer.java	(date 1667924486213)
+@@ -4,16 +4,21 @@
+ import java.io.FileInputStream;
+ import javazoom.jl.player.Player;
+ 
++/** Called when requesting to play audio files
++ * @author Nderon Beqiri-modified */
+ public class MusicPlayer extends Thread
+ {
+ 	private String filename;
+ 	private Player player;
+ 
++	/**Stores the current file which has been called*/
+ 	public MusicPlayer(String filename)
+ 	{
+ 		this.filename = filename;
+ 	}
+ 
++	/**Sets up to play the file audio*/
++
+ 	public void play()
+ 	{
+ 		new Thread()
+@@ -38,7 +43,7 @@
+ 
+ 
+ 
+-	//plays music file which is passed as argument to function
++	/**Plays the file audio*/
+ 	public static void getMusicPlay(String filename)
+ 	{
+ 		MusicPlayer musicPlayer = new MusicPlayer(filename);
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"d911fe45-1ce2-401c-b304-e515c73540da\" name=\"Changes\" comment=\"Rename of Classes, Files and Added Comments&#10;-- classes renamed to imply unique intent&#10;-- fxml files renamed to describe what they show&#10;-- comments added in most methods to describe functionality\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/AllTimeScores.txt\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/AllTimeScores.txt\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"module-info\" />\n        <option value=\"package-info\" />\n        <option value=\"Class\" />\n        <option value=\"JavaFXApplication\" />\n        <option value=\"FxmlFile\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n    <option name=\"RESET_MODE\" value=\"MIXED\" />\n  </component>\n  <component name=\"MarkdownSettingsMigration\">\n    <option name=\"stateVersion\" value=\"1\" />\n  </component>\n  <component name=\"ProjectId\" id=\"2GdJn0JRTrjH5vaZhU5ZI1LOTkm\" />\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\">\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\n  </component>\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">{\n  &quot;keyToString&quot;: {\n    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,\n    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,\n    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,\n    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,\n    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\n    &quot;last_opened_file_path&quot;: &quot;C:/Users/beqir/IdeaProjects/Snake/src/classHolder&quot;,\n    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,\n    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,\n    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,\n    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;\n  }\n}</component>\n  <component name=\"RecentsManager\">\n    <key name=\"CopyFile.RECENT_KEYS\">\n      <recent name=\"C:\\Users\\beqir\\IdeaProjects\\Snake\\src\\classHolder\" />\n      <recent name=\"C:\\Users\\beqir\\IdeaProjects\\Snake\\target\\classes\\com\\example\\snake\" />\n      <recent name=\"C:\\Users\\beqir\\IdeaProjects\\Snake\" />\n      <recent name=\"C:\\Users\\beqir\\IdeaProjects\\Snake\\src\" />\n      <recent name=\"C:\\Users\\beqir\\IdeaProjects\\Snake\\src\\main\" />\n    </key>\n    <key name=\"MoveFile.RECENT_KEYS\">\n      <recent name=\"C:\\Users\\beqir\\IdeaProjects\\Snake\" />\n      <recent name=\"C:\\Users\\beqir\\IdeaProjects\\Snake\\src\" />\n      <recent name=\"C:\\Users\\beqir\\IdeaProjects\\Snake\\src\\classHolder\" />\n      <recent name=\"C:\\Users\\beqir\\IdeaProjects\\Snake\\src\\imageHolder\" />\n      <recent name=\"C:\\Users\\beqir\\IdeaProjects\\Snake\\src\\images\" />\n    </key>\n    <key name=\"CopyClassDialog.RECENTS_KEY\">\n      <recent name=\"classHolder\" />\n    </key>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"d911fe45-1ce2-401c-b304-e515c73540da\" name=\"Changes\" comment=\"\" />\n      <created>1666712693206</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1666712693206</updated>\n    </task>\n    <task id=\"LOCAL-00001\" summary=\"Initial Clean Up- moduleinfo added, one new package.&#10;Frame bounds fixed, fruit images fixed to display all 17 fruits.&#10;Audio made to loop until the user loses the game.&#10;Simple graphic showing final score added, custom image added to be displayed if user scores 0.\">\n      <created>1666871953034</created>\n      <option name=\"number\" value=\"00001\" />\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1666871953034</updated>\n    </task>\n    <task id=\"LOCAL-00002\" summary=\"JFX Start Screen Implemented&#10;--5/6 Buttons of Start Screen Completed&#10;--Start Screen linked to Play method which starts the game after user has selected data&#10;--Reset and Exit Buttons added incase of human error in Start Screen&#10;--Single Player mode near completion&#10;--Music tweaked to end on the loop the game ends\">\n      <created>1667156700390</created>\n      <option name=\"number\" value=\"00002\" />\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1667156700390</updated>\n    </task>\n    <task id=\"LOCAL-00003\" summary=\"Cleaning of Code and gave Advance Level Button meaningful function&#10;-- removal of Paddle and Snake class (were not in use)&#10;-- modified Start Screen UI for clearer view&#10;-- Advance Level button changes background in Start Screen and in game&#10;-- ensured player enters username or they cannot play&#10;--added comments to Scene 1 and Scene 2 for clear functionality\">\n      <created>1667214160334</created>\n      <option name=\"number\" value=\"00003\" />\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1667214160334</updated>\n    </task>\n    <task id=\"LOCAL-00004\" summary=\"Scene 2 Completed&#10;--tweaked displayError() function as username was unnecessary\">\n      <created>1667214436535</created>\n      <option name=\"number\" value=\"00004\" />\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1667214436535</updated>\n    </task>\n    <task id=\"LOCAL-00005\" summary=\"Left Hand Gameplay&#10;-- implemented keys W A S D to work to allow left handed players to play\">\n      <created>1667222488445</created>\n      <option name=\"number\" value=\"00005\" />\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1667222488445</updated>\n    </task>\n    <task id=\"LOCAL-00006\" summary=\"Added File that stores all time scores&#10;-- ScoreToFile class added with 2 function&#10;-----storing username of player&#10;-----storing score of player&#10;Highscore.txt file added to store results&#10;--format&#10;-----username&#10;-----score\">\n      <created>1667237611523</created>\n      <option name=\"number\" value=\"00006\" />\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1667237611523</updated>\n    </task>\n    <task id=\"LOCAL-00007\" summary=\"Background music button implemented&#10;-- frogger.mp3 will play when Play Background Music button on Start Screen is clicked\">\n      <created>1667244736979</created>\n      <option name=\"number\" value=\"00007\" />\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1667244736979</updated>\n    </task>\n    <task id=\"LOCAL-00008\" summary=\"Refactoring: Public -&gt; Private and Removal of unused&#10;--every class that previously had public variables have now become private&#10;-- removal of unnecessary imports&#10;--removal of unnecessary variables&#10;--removal of unnecessary methods\">\n      <created>1667247591961</created>\n      <option name=\"number\" value=\"00008\" />\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1667247591961</updated>\n    </task>\n    <task id=\"LOCAL-00009\" summary=\"Renamed Classes for clarity&#10;--main method placed under Main class&#10;--Scene1 and Scene2 renamed to StartScrren and ErrorScreen&#10;--renamed Highscore.txt file to AllTimeScores.txt\">\n      <created>1667248197163</created>\n      <option name=\"number\" value=\"00009\" />\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1667248197163</updated>\n    </task>\n    <task id=\"LOCAL-00010\" summary=\"End of game changes, username displayed and more&#10;-- username will be shown at bottom of fail image once game ends, with a well played message&#10;-- username will be shown as part of special message if user achieves score of 0&#10;--all variables made private&#10;-- all unnecessary imports removed&#10;-- tweaked UI by improving font to make it more appealing to user&#10;-- more comments added for clarity of methods in each class\">\n      <created>1667305604037</created>\n      <option name=\"number\" value=\"00010\" />\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1667305604037</updated>\n    </task>\n    <task id=\"LOCAL-00011\" summary=\"All time score list output&#10;-- added method to display all scores after game ends&#10;-- added newlines to text file after each game for clearer structure\">\n      <created>1667386441973</created>\n      <option name=\"number\" value=\"00011\" />\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1667386441973</updated>\n    </task>\n    <task id=\"LOCAL-00012\" summary=\"Red Snake option added&#10;-- user can select between green and red snake&#10;---- button created for each option&#10;-- Play class now only called when begin button is clicked&#10;-- added 2 new images for snake head right and snake body right (red color)\">\n      <created>1667486505749</created>\n      <option name=\"number\" value=\"00012\" />\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1667486505749</updated>\n    </task>\n    <task id=\"LOCAL-00013\" summary=\"Implemented All Time Score into a JFX Screen&#10;-- NEXT STEP: LINK IT TO THE GAME ENDING&#10;-- added new fxml file that displays all scores&#10;-- added new class that defines the buttons in displayScores.fxml and the text area\">\n      <created>1667495641083</created>\n      <option name=\"number\" value=\"00013\" />\n      <option name=\"presentableId\" value=\"LOCAL-00013\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1667495641084</updated>\n    </task>\n    <task id=\"LOCAL-00014\" summary=\"All Time Score list displayed at start&#10;-- all scores displayed in the beginning&#10;-- button that allows user to go to start screen&#10;-- button that allows user to exit&#10;Added exit button to Start Screen&#10;-- when exit button is clicked, application closes&#10;-- tidied up the UI to improve visual quality\">\n      <created>1667561394487</created>\n      <option name=\"number\" value=\"00014\" />\n      <option name=\"presentableId\" value=\"LOCAL-00014\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1667561394487</updated>\n    </task>\n    <task id=\"LOCAL-00015\" summary=\"Obstacles Added to Sky Background game&#10;--added 4 different color rectangles (walls)&#10;-- when snake touches wall, game will end\">\n      <created>1667650813698</created>\n      <option name=\"number\" value=\"00015\" />\n      <option name=\"presentableId\" value=\"LOCAL-00015\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1667650813698</updated>\n    </task>\n    <task id=\"LOCAL-00016\" summary=\"Obstacles Added to Happy Background game&#10;--added 1 triagle (user can enter but not touch vertices)&#10;--added 1 square, user cannot touch\">\n      <created>1667652590486</created>\n      <option name=\"number\" value=\"00016\" />\n      <option name=\"presentableId\" value=\"LOCAL-00016\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1667652590486</updated>\n    </task>\n    <task id=\"LOCAL-00017\" summary=\"Implemented Rules Screen for clarity&#10;-- new fxml file added called rules to display rules when user clicks rules button on start screen&#10;-- changed main fxml file by deleting labels explaining rules and instead adding new button for it\">\n      <created>1667654017237</created>\n      <option name=\"number\" value=\"00017\" />\n      <option name=\"presentableId\" value=\"LOCAL-00017\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1667654017237</updated>\n    </task>\n    <task id=\"LOCAL-00018\" summary=\"Added Obstacles to advanced level&#10;-- advanced level now has walls, where if touched, game ends&#10;-- fixed rules fxml file\">\n      <created>1667666279494</created>\n      <option name=\"number\" value=\"00018\" />\n      <option name=\"presentableId\" value=\"LOCAL-00018\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1667666279494</updated>\n    </task>\n    <task id=\"LOCAL-00019\" summary=\"Empty Text File to download and store all time scores&#10;--user can download premade empty file which is appeneded after a game is played\">\n      <created>1667671642711</created>\n      <option name=\"number\" value=\"00019\" />\n      <option name=\"presentableId\" value=\"LOCAL-00019\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1667671642711</updated>\n    </task>\n    <task id=\"LOCAL-00020\" summary=\"Rename of Classes, Files and Added Comments&#10;-- classes renamed to imply unique intent&#10;-- fxml files renamed to describe what they show&#10;-- comments added in most methods to describe functionality\">\n      <created>1667671717404</created>\n      <option name=\"number\" value=\"00020\" />\n      <option name=\"presentableId\" value=\"LOCAL-00020\" />\n      <option name=\"project\" value=\"LOCAL\" />\n      <updated>1667671717404</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"21\" />\n    <servers />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"MAIN\">\n          <value>\n            <State>\n              <option name=\"BEK_SORT_TYPE\" value=\"1\" />\n            </State>\n          </value>\n        </entry>\n      </map>\n    </option>\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <option name=\"ADD_EXTERNAL_FILES_SILENTLY\" value=\"true\" />\n    <MESSAGE value=\"Initial Clean Up- moduleinfo added, one new package.&#10;Frame bounds fixed, fruit images fixed to display all 17 fruits.&#10;Audio made to loop until the user loses the game.&#10;Simple graphic showing final score added, custom image added to be displayed if user scores 0.\" />\n    <MESSAGE value=\"JFX Start Screen Implemented&#10;--5/6 Buttons of Start Screen Completed&#10;--Start Screen linked to Play method which starts the game after user has selected data&#10;--Reset and Exit Buttons added incase of human error in Start Screen&#10;--Single Player mode near completion&#10;--Music tweaked to end on the loop the game ends\" />\n    <MESSAGE value=\"Cleaning of Code and gave Advance Level Button meaningful function&#10;-- removal of Paddle and Snake class (were not in use)&#10;-- modified Start Screen UI for clearer view&#10;-- Advance Level button changes background in Start Screen and in game&#10;-- ensured player enters username or they cannot play&#10;--added comments to Scene 1 and Scene 2 for clear functionality\" />\n    <MESSAGE value=\"Scene 2 Completed&#10;--tweaked displayError() function as username was unnecessary\" />\n    <MESSAGE value=\"Left Hand Gameplay&#10;-- implemented keys W A S D to work to allow left handed players to play\" />\n    <MESSAGE value=\"Added File that stores all time scores&#10;-- ScoreToFile class added with 2 function&#10;-----storing username of player&#10;-----storing score of player&#10;Highscore.txt file added to store results&#10;--format&#10;-----username&#10;-----score\" />\n    <MESSAGE value=\"Background music button implemented&#10;-- frogger.mp3 will play when Play Background Music button on Start Screen is clicked\" />\n    <MESSAGE value=\"Refactoring: Public -&gt; Private and Removal of unused&#10;--every class that previously had public variables have now become private&#10;-- removal of unnecessary imports&#10;--removal of unnecessary variables&#10;--removal of unnecessary methods\" />\n    <MESSAGE value=\"Renamed Classes for clarity&#10;--main method placed under Main class&#10;--Scene1 and Scene2 renamed to StartScrren and ErrorScreen&#10;--renamed Highscore.txt file to AllTimeScores.txt\" />\n    <MESSAGE value=\"End of game changes, username displayed and more&#10;-- username will be shown at bottom of fail image once game ends, with a well played message&#10;-- username will be shown as part of special message if user achieves score of 0&#10;--all variables made private&#10;-- all unnecessary imports removed&#10;-- tweaked UI by improving font to make it more appealing to user&#10;-- more comments added for clarity of methods in each class\" />\n    <MESSAGE value=\"All time score list output&#10;-- added method to display all scores after game ends&#10;-- added newlines to text file after each game for clearer structure\" />\n    <MESSAGE value=\"Red Snake option added&#10;-- user can select between green and red snake&#10;---- button created for each option&#10;-- Play class now only called when begin button is clicked&#10;-- added 2 new images for snake head right and snake body right (red color)\" />\n    <MESSAGE value=\"Implemented All Time Score into a JFX Screen&#10;-- NEXT STEP: LINK IT TO THE GAME ENDING&#10;-- added new fxml file that displays all scores&#10;-- added new class that defines the buttons in displayScores.fxml and the text area\" />\n    <MESSAGE value=\"All Time Score list displayed at start&#10;-- all scores displayed in the beginning&#10;-- button that allows user to go to start screen&#10;-- button that allows user to exit&#10;Added exit button to Start Screen&#10;-- when exit button is clicked, application closes&#10;-- tidied up the UI to improve visual quality\" />\n    <MESSAGE value=\"Obstacles Added to Sky Background game&#10;--added 4 different color rectangles (walls)&#10;-- when snake touches wall, game will end\" />\n    <MESSAGE value=\"Obstacles Added to Happy Background game&#10;--added 1 triagle (user can enter but not touch vertices)&#10;--added 1 square, user cannot touch\" />\n    <MESSAGE value=\"Implemented Rules Screen for clarity&#10;-- new fxml file added called rules to display rules when user clicks rules button on start screen&#10;-- changed main fxml file by deleting labels explaining rules and instead adding new button for it\" />\n    <MESSAGE value=\"Added Obstacles to advanced level&#10;-- advanced level now has walls, where if touched, game ends&#10;-- fixed rules fxml file\" />\n    <MESSAGE value=\"Empty Text File to download and store all time scores&#10;--user can download premade empty file which is appeneded after a game is played\" />\n    <MESSAGE value=\"Rename of Classes, Files and Added Comments&#10;-- classes renamed to imply unique intent&#10;-- fxml files renamed to describe what they show&#10;-- comments added in most methods to describe functionality\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Rename of Classes, Files and Added Comments&#10;-- classes renamed to imply unique intent&#10;-- fxml files renamed to describe what they show&#10;-- comments added in most methods to describe functionality\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision b47330579b923818631d80c1628c830a9eeb628a)
++++ b/.idea/workspace.xml	(date 1668029993756)
+@@ -1,9 +1,45 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
+   <component name="ChangeListManager">
+-    <list default="true" id="d911fe45-1ce2-401c-b304-e515c73540da" name="Changes" comment="Rename of Classes, Files and Added Comments&#10;-- classes renamed to imply unique intent&#10;-- fxml files renamed to describe what they show&#10;-- comments added in most methods to describe functionality">
++    <list default="true" id="d911fe45-1ce2-401c-b304-e515c73540da" name="Changes" comment="All Time Scores File for download&#10;-- user can download file play Snake&#10;----- after each game, name entered and score is appended to file&#10;------file is read to AllTimeScores class which displays scores when fxml file is called">
++      <change afterPath="$PROJECT_DIR$/src/Tests/MyFrameTest.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/src/Tests/StartScreenTest.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/src/classHolder/Rectangles.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/src/classHolder/package-info.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/AllTimeScores.txt" beforeDir="false" afterPath="$PROJECT_DIR$/AllTimeScores.txt" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Snake.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Snake.iml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/classHolder/AllTimeScores.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classHolder/AllTimeScores.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/classHolder/ErrorScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classHolder/ErrorScreen.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/classHolder/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classHolder/Food.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/classHolder/GameUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classHolder/GameUtil.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/classHolder/ImageUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classHolder/ImageUtil.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/classHolder/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classHolder/Main.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/classHolder/MusicPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classHolder/MusicPlayer.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/classHolder/MyFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classHolder/MyFrame.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/classHolder/Play.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classHolder/Play.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/classHolder/ScoreToFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classHolder/ScoreToFile.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/classHolder/StartScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classHolder/StartScreen.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/classHolder/jl1.0.1.jar" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/classHolder/jlayer1.0.1.zip" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/classHolder/movable.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classHolder/movable.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/classHolder/snake-body-red.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/classHolder/snake-body-red.png" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/classHolder/snake-head-right-red.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/classHolder/snake-head-right-red.png" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/module-info.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/target/classes/com/example/cwplayground/HelloApplication.class" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/target/classes/com/example/cwplayground/Scene1.class" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/target/classes/com/example/cwplayground/Scene2.class" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/target/classes/com/example/snake/HelloApplication.class" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/target/classes/com/example/snake/Scene1.class" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/target/classes/com/example/snake/Scene2.class" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/target/classes/com/example/snake/UI-background.png" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/target/classes/com/example/snake/UI-background2.png" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/target/classes/com/example/snake/endFacts.fxml" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/target/classes/com/example/snake/frogger.mp3" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/target/classes/com/example/snake/main.fxml" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/target/classes/com/example/snake/snake-logo.png" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/target/classes/com/example/snake/startScreenSnake.png" beforeDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -14,10 +50,11 @@
+     <option name="RECENT_TEMPLATES">
+       <list>
+         <option value="module-info" />
+-        <option value="package-info" />
+-        <option value="Class" />
+         <option value="JavaFXApplication" />
+         <option value="FxmlFile" />
++        <option value="JUnit5 Test Class" />
++        <option value="package-info" />
++        <option value="Class" />
+       </list>
+     </option>
+   </component>
+@@ -46,7 +83,10 @@
+     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+     &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+-    &quot;last_opened_file_path&quot;: &quot;C:/Users/beqir/IdeaProjects/Snake/src/classHolder&quot;,
++    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
++    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
++    &quot;create.test.in.the.same.root&quot;: &quot;true&quot;,
++    &quot;last_opened_file_path&quot;: &quot;C:/Users/beqir/IdeaProjects/BeqiriNderon_19/src&quot;,
+     &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+@@ -55,11 +95,11 @@
+ }</component>
+   <component name="RecentsManager">
+     <key name="CopyFile.RECENT_KEYS">
++      <recent name="C:\Users\beqir\IdeaProjects\BeqiriNderon_19\src" />
++      <recent name="C:\Users\beqir\IdeaProjects\BeqiriNderon_19\src\classHolder" />
++      <recent name="C:\Users\beqir\.m2\repository\org\junit\platform\junit-platform-commons\1.8.1\junit-platform-commons-1.8.1.jar" />
+       <recent name="C:\Users\beqir\IdeaProjects\Snake\src\classHolder" />
+       <recent name="C:\Users\beqir\IdeaProjects\Snake\target\classes\com\example\snake" />
+-      <recent name="C:\Users\beqir\IdeaProjects\Snake" />
+-      <recent name="C:\Users\beqir\IdeaProjects\Snake\src" />
+-      <recent name="C:\Users\beqir\IdeaProjects\Snake\src\main" />
+     </key>
+     <key name="MoveFile.RECENT_KEYS">
+       <recent name="C:\Users\beqir\IdeaProjects\Snake" />
+@@ -67,10 +107,93 @@
+       <recent name="C:\Users\beqir\IdeaProjects\Snake\src\classHolder" />
+       <recent name="C:\Users\beqir\IdeaProjects\Snake\src\imageHolder" />
+       <recent name="C:\Users\beqir\IdeaProjects\Snake\src\images" />
++    </key>
++    <key name="CreateTestDialog.Recents.Supers">
++      <recent name="" />
++    </key>
++    <key name="CreateTestDialog.RecentsKey">
++      <recent name="classHolder" />
+     </key>
+     <key name="CopyClassDialog.RECENTS_KEY">
++      <recent name="Tests" />
+       <recent name="classHolder" />
+     </key>
++  </component>
++  <component name="RunManager">
++    <configuration name="MyFrameTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++      <module name="Snake" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="Tests.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <option name="PACKAGE_NAME" value="Tests" />
++      <option name="MAIN_CLASS_NAME" value="Tests.MyFrameTest" />
++      <option name="TEST_OBJECT" value="class" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <configuration name="StartScreenTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++      <module name="Snake" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="Tests.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <option name="PACKAGE_NAME" value="Tests" />
++      <option name="MAIN_CLASS_NAME" value="Tests.StartScreenTest" />
++      <option name="TEST_OBJECT" value="class" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <configuration name="StartScreenTest.basicLevel" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++      <module name="Snake" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="classHolder.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <option name="PACKAGE_NAME" value="classHolder" />
++      <option name="MAIN_CLASS_NAME" value="classHolder.StartScreenTest" />
++      <option name="METHOD_NAME" value="basicLevel" />
++      <option name="TEST_OBJECT" value="method" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <configuration name="StartScreenTest.displayImage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
++      <module name="Snake" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="classHolder.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <option name="PACKAGE_NAME" value="classHolder" />
++      <option name="MAIN_CLASS_NAME" value="classHolder.StartScreenTest" />
++      <option name="METHOD_NAME" value="displayImage" />
++      <option name="TEST_OBJECT" value="method" />
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <configuration name="junit-platform-commons-1.8.1.jar" type="JarApplication">
++      <option name="JAR_PATH" value="$MAVEN_REPOSITORY$/org/junit/platform/junit-platform-commons/1.8.1/junit-platform-commons-1.8.1.jar!/" />
++      <method v="2" />
++    </configuration>
++    <recent_temporary>
++      <list>
++        <item itemvalue="JUnit.StartScreenTest" />
++        <item itemvalue="JUnit.MyFrameTest" />
++        <item itemvalue="JUnit.StartScreenTest.basicLevel" />
++        <item itemvalue="JUnit.StartScreenTest.displayImage" />
++      </list>
++    </recent_temporary>
+   </component>
+   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+   <component name="TaskManager">
+@@ -221,7 +344,21 @@
+       <option name="project" value="LOCAL" />
+       <updated>1667671717404</updated>
+     </task>
+-    <option name="localTasksCounter" value="21" />
++    <task id="LOCAL-00021" summary="All Time Scores File for download&#10;-- user can download file play Snake&#10;----- after each game, name entered and score is appended to file&#10;------file is read to AllTimeScores class which displays scores when fxml file is called">
++      <created>1667672330542</created>
++      <option name="number" value="00021" />
++      <option name="presentableId" value="LOCAL-00021" />
++      <option name="project" value="LOCAL" />
++      <updated>1667672330542</updated>
++    </task>
++    <task id="LOCAL-00022" summary="All Time Scores File for download&#10;-- user can download file play Snake&#10;----- after each game, name entered and score is appended to file&#10;------file is read to AllTimeScores class which displays scores when fxml file is called">
++      <created>1667672383685</created>
++      <option name="number" value="00022" />
++      <option name="presentableId" value="LOCAL-00022" />
++      <option name="project" value="LOCAL" />
++      <updated>1667672383685</updated>
++    </task>
++    <option name="localTasksCounter" value="23" />
+     <servers />
+   </component>
+   <component name="Vcs.Log.Tabs.Properties">
+@@ -259,6 +396,7 @@
+     <MESSAGE value="Added Obstacles to advanced level&#10;-- advanced level now has walls, where if touched, game ends&#10;-- fixed rules fxml file" />
+     <MESSAGE value="Empty Text File to download and store all time scores&#10;--user can download premade empty file which is appeneded after a game is played" />
+     <MESSAGE value="Rename of Classes, Files and Added Comments&#10;-- classes renamed to imply unique intent&#10;-- fxml files renamed to describe what they show&#10;-- comments added in most methods to describe functionality" />
+-    <option name="LAST_COMMIT_MESSAGE" value="Rename of Classes, Files and Added Comments&#10;-- classes renamed to imply unique intent&#10;-- fxml files renamed to describe what they show&#10;-- comments added in most methods to describe functionality" />
++    <MESSAGE value="All Time Scores File for download&#10;-- user can download file play Snake&#10;----- after each game, name entered and score is appended to file&#10;------file is read to AllTimeScores class which displays scores when fxml file is called" />
++    <option name="LAST_COMMIT_MESSAGE" value="All Time Scores File for download&#10;-- user can download file play Snake&#10;----- after each game, name entered and score is appended to file&#10;------file is read to AllTimeScores class which displays scores when fxml file is called" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: src/classHolder/MyFrame.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package classHolder;\nimport java.awt.*;\nimport java.awt.event.KeyEvent;\nimport java.awt.event.KeyListener;\nimport java.awt.event.WindowAdapter;\nimport java.awt.event.WindowEvent;\nimport java.awt.image.BufferedImage;\nimport java.util.LinkedList;\nimport java.util.List;\nimport javax.swing.*;\n\npublic class MyFrame extends JPanel implements KeyListener\n{\n\tprivate static final long serialVersionUID = -3149926831770554380L;\n\n\n\tprivate JFrame jFrame = new JFrame();\n\n\tpublic MyFrame()\n\t{\n\t\t//set icon of frame to snake logo\n\t\tjFrame.setIconImage(Toolkit.getDefaultToolkit().getImage(MyFrame.class.getResource(\"snake-logo.png\")));\n\t}\n\n\tpublic void loadFrame()\n\t{\n\n\t\tthis.setDoubleBuffered(true);\n\t\tjFrame.add(this);\n\t\tjFrame.addKeyListener(this);\n\n\t\t//set frame properties\n\t\tjFrame.setTitle(\"Snakee Yipee\");\n\t\tjFrame.setSize(870, 560);\n\t\tjFrame.setLocationRelativeTo(null);\n\t\tjFrame.addWindowListener(new WindowAdapter()// loka\n\t\t{\n\t\t\t@Override\n\t\t\tpublic void windowClosing(WindowEvent e)\n\t\t\t{\n\t\t\t\tsuper.windowClosing(e);\n\t\t\t\tSystem.exit(0);\n\t\t\t}\n\t\t});\n\t\tjFrame.setVisible(true);\n\n\t\tnew MyThread().start();\n\t}\n\tclass MyThread extends Thread\n\t{\n\t\t@Override\n\t\tpublic void run()\n\t\t{\n\t\t\tsuper.run();\n\t\t\twhile (true)\n\t\t\t{\n\t\t\t\trepaint();\n\t\t\t\ttry\n\t\t\t\t{\n\t\t\t\t\tsleep(30);\n\t\t\t\t} catch (Exception e)\n\t\t\t\t{\n\t\t\t\t\te.printStackTrace();\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t}\n\n\t@Override\n\tpublic void keyTyped(KeyEvent e)\n\t{\n\t\t// TODO Auto-generated method stub\n\n\t}\n\n\t@Override\n\tpublic void keyPressed(KeyEvent e)\n\t{\n\t\t// TODO Auto-generated method stub\n\n\t}\n\n\t@Override\n\tpublic void keyReleased(KeyEvent e)\n\t{\n\t\t// TODO Auto-generated method stub\n\n\t}\n\n\tpublic static class MySnake extends SnakeObject implements movable\n\t{\n\t\tprivate int speed_XY;\n\t\tprivate int length;\n\t\tprivate int num; // ?\n\t\tpublic int score = 0;\n\t\tprivate static final BufferedImage IMG_SNAKE_HEAD = (BufferedImage) ImageUtil.images.get(\"snake-head-right\");\n\t\tprivate static final BufferedImage IMG_SNAKE_HEAD_RED = (BufferedImage) ImageUtil.images.get(\"snake-head-right-red\");\n\t\tprivate static List<Point> bodyPoints = new LinkedList<>();\n\n\t\tprivate static BufferedImage newImgSnakeHead;\n\t\tboolean up, down, left, right = true;\n\n\t\t//integer to determine snake color, intialized to 0 (green)\n\t\t//isRed = 1 represents red snake\n\t\tpublic static int isRed=0;\n\n\t\tpublic MySnake(int x, int y)\n\t\t{\n\n\t\t\tthis.l = true;\n\t\t\tthis.x = x;\n\t\t\tthis.y = y;\n\t\t\t//checks if snake is going to be green or red\n\t\t\tif(isRed!=1) {\n\t\t\t\tthis.i = ImageUtil.images.get(\"snake-body\");\n\t\t\t}\n\t\t\telse{\n\t\t\t\tthis.i=ImageUtil.images.get(\"snake-body-red\");\n\t\t\t}\n\t\t\tthis.w = i.getWidth(null);\n\t\t\tthis.h = i.getHeight(null);\n\n\t\t\tthis.speed_XY = 5;\n\t\t\tthis.length = 1;\n\n\t\t\tthis.num = w / speed_XY;\n\t\t\tif(isRed!=1) {\n\t\t\t\tnewImgSnakeHead = IMG_SNAKE_HEAD;\n\t\t\t}\n\t\t\telse{\n\t\t\t\tnewImgSnakeHead=IMG_SNAKE_HEAD_RED;\n\t\t\t}\n\n\t\t}\n\n\t\tpublic int getLength()\n\t\t{\n\t\t\treturn length;\n\t\t}\n\n\t\tpublic void changeLength(int length)\n\t\t{\n\t\t\tthis.length = length;\n\t\t}\n\t\tpublic void keyPressed(KeyEvent e)\n\t\t{\n\t\t\tswitch (e.getKeyCode())\n\t\t\t{\n\t\t\tcase KeyEvent.VK_UP:\n\t\t\t\t//left hand case\n\t\t\t\tcase KeyEvent.VK_W:\n\t\t\t\t\tif (!down)\n\t\t\t\t{\n\t\t\t\t\tup = true;\n\t\t\t\t\tdown = false;\n\t\t\t\t\tleft = false;\n\t\t\t\t\tright = false;\n\n\t\t\t\t\tif(isRed!=1) {\n\t\t\t\t\t\tnewImgSnakeHead = (BufferedImage) GameUtil.rotateImage(IMG_SNAKE_HEAD, -90);\n\t\t\t\t\t}\n\t\t\t\t\telse {\n\t\t\t\t\t\tnewImgSnakeHead = (BufferedImage) GameUtil.rotateImage(IMG_SNAKE_HEAD_RED, -90);\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t\tbreak;\n\n\t\t\tcase KeyEvent.VK_DOWN:\n\t\t\t\t//left hand case\n\t\t\t\tcase KeyEvent.VK_S:\n\t\t\t\t\tif (!up)\n\t\t\t\t{\n\t\t\t\t\tup = false;\n\t\t\t\t\tdown = true;\n\t\t\t\t\tleft = false;\n\t\t\t\t\tright = false;\n\n\t\t\t\t\tif(isRed!=1) {\n\t\t\t\t\t\tnewImgSnakeHead = (BufferedImage) GameUtil.rotateImage(IMG_SNAKE_HEAD, 90);\n\t\t\t\t\t}\n\t\t\t\t\telse{\n\t\t\t\t\t\tnewImgSnakeHead = (BufferedImage) GameUtil.rotateImage(IMG_SNAKE_HEAD_RED, 90);\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t\tbreak;\n\n\n\t\t\tcase KeyEvent.VK_LEFT:\n\t\t\t\t//left hand case\n\t\t\t\tcase KeyEvent.VK_A:\n\t\t\t\t\tif (!right)\n\t\t\t\t{\n\t\t\t\t\tup = false;\n\t\t\t\t\tdown = false;\n\t\t\t\t\tleft = true;\n\t\t\t\t\tright = false;\n\n\t\t\t\t\tif(isRed!=1) {\n\t\t\t\t\t\tnewImgSnakeHead = (BufferedImage) GameUtil.rotateImage(IMG_SNAKE_HEAD, -180);\n\t\t\t\t\t}\n\t\t\t\t\telse {\n\t\t\t\t\t\tnewImgSnakeHead = (BufferedImage) GameUtil.rotateImage(IMG_SNAKE_HEAD_RED, -180);\n\t\t\t\t\t}\n\n\t\t\t\t}\n\t\t\t\tbreak;\n\n\t\t\tcase KeyEvent.VK_RIGHT:\n\t\t\t\t//left hand case\n\t\t\t\tcase KeyEvent.VK_D:\n\t\t\t\t\tif (!left)\n\t\t\t\t{\n\t\t\t\t\tup = false;\n\t\t\t\t\tdown = false;\n\t\t\t\t\tleft = false;\n\t\t\t\t\tright = true;\n\n\t\t\t\t\tif(isRed!=1) {\n\t\t\t\t\t\tnewImgSnakeHead = IMG_SNAKE_HEAD;\n\t\t\t\t\t}\n\t\t\t\t\telse{\n\t\t\t\t\t\tnewImgSnakeHead = IMG_SNAKE_HEAD_RED;\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t\tbreak;\n\n\t\t\t\tdefault:\n\t\t\tbreak;\n\t\t\t}\n\t\t}\n\n\n\t\tpublic void move()\n\t\t{\n\t\t\tif (up)\n\t\t\t{\n\t\t\t\ty -= speed_XY;\n\t\t\t} else if (down)\n\t\t\t{\n\t\t\t\ty += speed_XY;\n\t\t\t} else if (left)\n\t\t\t{\n\t\t\t\tx -= speed_XY;\n\t\t\t} else if (right)\n\t\t\t{\n\t\t\t\tx += speed_XY;\n\t\t\t}\n\n\t\t}\n\n\t\t@Override\n\t\tpublic void draw(Graphics g)\n\t\t{\n\t\t\toutOfBounds();\n\t\t\teatBody();\n\n\t\t\tbodyPoints.add(new Point(x, y));\n\n\t\t\tif (bodyPoints.size() == (this.length + 1) * num)\n\t\t\t{\n\t\t\t\tbodyPoints.remove(0);\n\t\t\t}\n\t\t\tg.drawImage(newImgSnakeHead, x, y, null);\n\t\t\tdrawBody(g);\n\n\t\t\tmove();\n\t\t}\n\n\t\tpublic void eatBody()\n\t\t{\n\t\t\tfor (Point point : bodyPoints)\n\t\t\t{\n\t\t\t\tfor (Point point2 : bodyPoints)\n\t\t\t\t{\n\t\t\t\t\tif (point.equals(point2) && point != point2)\n\t\t\t\t\t{\n\t\t\t\t\t\tthis.l = false;\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\n\t\tpublic void drawBody(Graphics g)\n\t\t{\n\t\t\tint length = bodyPoints.size() - 1 - num;\n\n\t\t\tfor (int i = length; i >= num; i -= num)\n\t\t\t{\n\t\t\t\tPoint point = bodyPoints.get(i);\n\t\t\t\tg.drawImage(this.i, point.x, point.y, null);\n\t\t\t}\n\t\t}\n\n\t\tprivate void outOfBounds()\n\t\t{\n\t\t\t//fix out of bounds for top, bottom, left and right\n\t\t\tboolean xOut = (x <= 0 || x >= (860 - w));\n\t\t\tboolean yOut = (y <= 0 || y >= (525 - h));\n\t\t\tif (xOut || yOut)\n\t\t\t{\n\t\t\t\tl = false;\n\t\t\t}\n\t\t}\n\t}\n\n\tpublic abstract static class SnakeObject\n\t{\n\t\tint x;\n\t\tint y;\n\t\tImage i;\n\t\tint w;\n\t\tint h;\n\n\t\tpublic boolean l;\n\n\n\t\tpublic abstract void draw(Graphics g);\n\n\t\tpublic Rectangle getRectangle()\n\t\t{\n\t\t\treturn new Rectangle(x, y, w, h);\n\t\t}\n\t}\n\n\n}\n\n\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/classHolder/MyFrame.java b/src/classHolder/MyFrame.java
+--- a/src/classHolder/MyFrame.java	(revision b47330579b923818631d80c1628c830a9eeb628a)
++++ b/src/classHolder/MyFrame.java	(date 1667924497049)
+@@ -9,6 +9,10 @@
+ import java.util.List;
+ import javax.swing.*;
+ 
++/** Called when game begins.
++ * Sets up frame after stage is closed.
++ * This is where game is displayed and played.
++ * @author Nderon Beqiri-modified */
+ public class MyFrame extends JPanel implements KeyListener
+ {
+ 	private static final long serialVersionUID = -3149926831770554380L;
+@@ -16,13 +20,15 @@
+ 
+ 	private JFrame jFrame = new JFrame();
+ 
++	/**Set icon of frame in top corner and desktop bar*/
+ 	public MyFrame()
+ 	{
+ 		//set icon of frame to snake logo
+ 		jFrame.setIconImage(Toolkit.getDefaultToolkit().getImage(MyFrame.class.getResource("snake-logo.png")));
+ 	}
+ 
+-	public void loadFrame()
++	/**Set frame attributes*/
++	public boolean loadFrame()
+ 	{
+ 
+ 		this.setDoubleBuffered(true);
+@@ -35,6 +41,7 @@
+ 		jFrame.setLocationRelativeTo(null);
+ 		jFrame.addWindowListener(new WindowAdapter()// loka
+ 		{
++			/**Closing of program*/
+ 			@Override
+ 			public void windowClosing(WindowEvent e)
+ 			{
+@@ -45,6 +52,7 @@
+ 		jFrame.setVisible(true);
+ 
+ 		new MyThread().start();
++		return true;
+ 	}
+ 	class MyThread extends Thread
+ 	{
+@@ -66,6 +74,7 @@
+ 		}
+ 	}
+ 
++	/**Key has been typed*/
+ 	@Override
+ 	public void keyTyped(KeyEvent e)
+ 	{
+@@ -73,6 +82,7 @@
+ 
+ 	}
+ 
++	/**Key has been pressed*/
+ 	@Override
+ 	public void keyPressed(KeyEvent e)
+ 	{
+@@ -80,6 +90,7 @@
+ 
+ 	}
+ 
++	/**Key has been let go*/
+ 	@Override
+ 	public void keyReleased(KeyEvent e)
+ 	{
+@@ -87,6 +98,9 @@
+ 
+ 	}
+ 
++	/**Sets up snake object and its attributes.
++	 * @author Nderon Beqiri-modified
++	 */
+ 	public static class MySnake extends SnakeObject implements movable
+ 	{
+ 		private int speed_XY;
+@@ -104,6 +118,7 @@
+ 		//isRed = 1 represents red snake
+ 		public static int isRed=0;
+ 
++		/**Creation of snake object.*/
+ 		public MySnake(int x, int y)
+ 		{
+ 
+@@ -133,103 +148,107 @@
+ 
+ 		}
+ 
++		/**Return the length of the snake*/
+ 		public int getLength()
+ 		{
+ 			return length;
+ 		}
+ 
++		/**Change the length of the snake*/
+ 		public void changeLength(int length)
+ 		{
+ 			this.length = length;
+ 		}
++		/**Check which key has been pressed and forms a response*/
+ 		public void keyPressed(KeyEvent e)
+ 		{
+ 			switch (e.getKeyCode())
+ 			{
+-			case KeyEvent.VK_UP:
+-				//left hand case
++				case KeyEvent.VK_UP:
++					//left hand case
+ 				case KeyEvent.VK_W:
+ 					if (!down)
+-				{
+-					up = true;
+-					down = false;
+-					left = false;
+-					right = false;
++					{
++						up = true;
++						down = false;
++						left = false;
++						right = false;
+ 
+-					if(isRed!=1) {
+-						newImgSnakeHead = (BufferedImage) GameUtil.rotateImage(IMG_SNAKE_HEAD, -90);
+-					}
+-					else {
+-						newImgSnakeHead = (BufferedImage) GameUtil.rotateImage(IMG_SNAKE_HEAD_RED, -90);
+-					}
+-				}
+-				break;
++						if(isRed!=1) {
++							newImgSnakeHead = (BufferedImage) GameUtil.rotateImage(IMG_SNAKE_HEAD, -90);
++						}
++						else {
++							newImgSnakeHead = (BufferedImage) GameUtil.rotateImage(IMG_SNAKE_HEAD_RED, -90);
++						}
++					}
++					break;
+ 
+-			case KeyEvent.VK_DOWN:
+-				//left hand case
++				case KeyEvent.VK_DOWN:
++					//left hand case
+ 				case KeyEvent.VK_S:
+ 					if (!up)
+-				{
+-					up = false;
+-					down = true;
+-					left = false;
+-					right = false;
++					{
++						up = false;
++						down = true;
++						left = false;
++						right = false;
+ 
+-					if(isRed!=1) {
+-						newImgSnakeHead = (BufferedImage) GameUtil.rotateImage(IMG_SNAKE_HEAD, 90);
+-					}
+-					else{
+-						newImgSnakeHead = (BufferedImage) GameUtil.rotateImage(IMG_SNAKE_HEAD_RED, 90);
+-					}
+-				}
+-				break;
++						if(isRed!=1) {
++							newImgSnakeHead = (BufferedImage) GameUtil.rotateImage(IMG_SNAKE_HEAD, 90);
++						}
++						else{
++							newImgSnakeHead = (BufferedImage) GameUtil.rotateImage(IMG_SNAKE_HEAD_RED, 90);
++						}
++					}
++					break;
+ 
+ 
+-			case KeyEvent.VK_LEFT:
+-				//left hand case
++				case KeyEvent.VK_LEFT:
++					//left hand case
+ 				case KeyEvent.VK_A:
+ 					if (!right)
+-				{
+-					up = false;
+-					down = false;
+-					left = true;
+-					right = false;
++					{
++						up = false;
++						down = false;
++						left = true;
++						right = false;
+ 
+-					if(isRed!=1) {
+-						newImgSnakeHead = (BufferedImage) GameUtil.rotateImage(IMG_SNAKE_HEAD, -180);
+-					}
+-					else {
+-						newImgSnakeHead = (BufferedImage) GameUtil.rotateImage(IMG_SNAKE_HEAD_RED, -180);
+-					}
++						if(isRed!=1) {
++							newImgSnakeHead = (BufferedImage) GameUtil.rotateImage(IMG_SNAKE_HEAD, -180);
++						}
++						else {
++							newImgSnakeHead = (BufferedImage) GameUtil.rotateImage(IMG_SNAKE_HEAD_RED, -180);
++						}
+ 
+-				}
+-				break;
++					}
++					break;
+ 
+-			case KeyEvent.VK_RIGHT:
+-				//left hand case
++				case KeyEvent.VK_RIGHT:
++					//left hand case
+ 				case KeyEvent.VK_D:
+ 					if (!left)
+-				{
+-					up = false;
+-					down = false;
+-					left = false;
+-					right = true;
++					{
++						up = false;
++						down = false;
++						left = false;
++						right = true;
+ 
+-					if(isRed!=1) {
+-						newImgSnakeHead = IMG_SNAKE_HEAD;
+-					}
+-					else{
+-						newImgSnakeHead = IMG_SNAKE_HEAD_RED;
+-					}
+-				}
+-				break;
++						if(isRed!=1) {
++							newImgSnakeHead = IMG_SNAKE_HEAD;
++						}
++						else{
++							newImgSnakeHead = IMG_SNAKE_HEAD_RED;
++						}
++					}
++					break;
+ 
+ 				default:
+-			break;
++					break;
+ 			}
+ 		}
+ 
+ 
++		/**Inherited from interface movable, alters the method*/
+ 		public void move()
+ 		{
+ 			if (up)
+@@ -248,6 +267,8 @@
+ 
+ 		}
+ 
++
++
+ 		@Override
+ 		public void draw(Graphics g)
+ 		{
+@@ -266,6 +287,7 @@
+ 			move();
+ 		}
+ 
++		/**If snake head intersects snake body*/
+ 		public void eatBody()
+ 		{
+ 			for (Point point : bodyPoints)
+@@ -280,6 +302,7 @@
+ 			}
+ 		}
+ 
++		/**Draw body of snake*/
+ 		public void drawBody(Graphics g)
+ 		{
+ 			int length = bodyPoints.size() - 1 - num;
+@@ -291,6 +314,7 @@
+ 			}
+ 		}
+ 
++		/**Determine boundaries of frame*/
+ 		private void outOfBounds()
+ 		{
+ 			//fix out of bounds for top, bottom, left and right
+@@ -303,6 +327,8 @@
+ 		}
+ 	}
+ 
++	/** Creates the snake.
++	 * @author Nderon Beqiri-modified */
+ 	public abstract static class SnakeObject
+ 	{
+ 		int x;
+@@ -326,3 +352,4 @@
+ }
+ 
+ 
++
+Index: src/Tests/StartScreenTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Tests/StartScreenTest.java b/src/Tests/StartScreenTest.java
+new file mode 100644
+--- /dev/null	(date 1667819075333)
++++ b/src/Tests/StartScreenTest.java	(date 1667819075333)
+@@ -0,0 +1,28 @@
++package Tests;
++
++import classHolder.StartScreen;
++import org.junit.jupiter.api.Test;
++
++import static org.junit.jupiter.api.Assertions.assertEquals;
++
++class StartScreenTest {
++
++    @Test
++    void basicLevel() {
++        var level = new StartScreen();
++        assertEquals(0,level.basicLevel());
++    }
++
++
++    @Test
++    void playGreenSnake() {
++        var snake = new StartScreen();
++        assertEquals(0,snake.playGreenSnake());
++    }
++
++    @Test
++    void playRedSnake() {
++        var snake = new StartScreen();
++        assertEquals(1,snake.playRedSnake());
++    }
++}
+Index: .idea/misc.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ProjectRootManager\" version=\"2\" languageLevel=\"JDK_19\" default=\"true\" project-jdk-name=\"openjdk-19\" project-jdk-type=\"JavaSDK\">\n    <output url=\"file://$PROJECT_DIR$/out\" />\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/misc.xml b/.idea/misc.xml
+--- a/.idea/misc.xml	(revision b47330579b923818631d80c1628c830a9eeb628a)
++++ b/.idea/misc.xml	(date 1667929926461)
+@@ -1,5 +1,9 @@
+ <?xml version="1.0" encoding="UTF-8"?>
+ <project version="4">
++  <component name="JavadocGenerationManager">
++    <option name="OUTPUT_DIRECTORY" value="$USER_HOME$/Downloads" />
++    <option name="OPTION_DOCUMENT_TAG_AUTHOR" value="true" />
++  </component>
+   <component name="ProjectRootManager" version="2" languageLevel="JDK_19" default="true" project-jdk-name="openjdk-19" project-jdk-type="JavaSDK">
+     <output url="file://$PROJECT_DIR$/out" />
+   </component>
+Index: src/classHolder/StartScreen.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package classHolder;\nimport javafx.application.Platform;\nimport javafx.event.ActionEvent;\nimport javafx.fxml.FXML;\nimport javafx.fxml.FXMLLoader;\nimport javafx.scene.Node;\nimport javafx.scene.Parent;\nimport javafx.scene.Scene;\nimport javafx.scene.control.TextField;\nimport javafx.scene.image.Image;\nimport javafx.scene.image.ImageView;\nimport javafx.stage.Stage;\n\nimport java.io.IOException;\n\npublic class StartScreen {\n    private Parent root;\n    private Scene scene;\n    private Stage stage;\n    @FXML\n    private ImageView myImageView;\n    private int choice=5;\n    private int bg=5;\n    @FXML\n    private TextField nameTextField;\n\n    private final MusicPlayer musicPlayer = new MusicPlayer(\"src/classHolder/frogger.mp3\");\n\n    private final ScoreToFile highscore = new ScoreToFile();\n\n    private final Image myImage = new Image(getClass().getResourceAsStream(\"UI-background2.png\"));\n    private final Image myImage2 = new Image(getClass().getResourceAsStream(\"UI-background.png\"));\n\n    private final Image myImage3 = new Image(getClass().getResourceAsStream(\"UI-background3.png\"));\n\n\n    //allow user to click Play Background Music and play frogger.mp3\n    @FXML\n    void onPlayAudio (ActionEvent event){\n        musicPlayer.play();\n    }\n\n    //called when user clicks Sky Background button\n    public void displayImage(){\n        myImageView.setImage(myImage);\n        bg=1;\n    }\n\n    //called when user clicks Happy Background button\n    public void displayImage2(){\n        myImageView.setImage(myImage2);\n        bg=0;\n    }\n\n    //called when user clicks Basic Level button\n    public void basicLevel(){\n        choice=0;\n        System.out.println(\"Selected Basic Level\");\n    }\n\n    //called when user clicks Advanced Level button\n    public void advancedLevel(){\n        choice=1;\n        myImageView.setImage(myImage3);\n        System.out.println(\"Selected Advanced Level\");\n    }\n\n    //if button is clicked, snake will be green\n    public void playGreenSnake(){\n        MyFrame.MySnake.isRed=0;\n        System.out.println(\"Selected Green Snake\");\n\n    }\n\n    //if button is clicked, snake will be red\n    public void playRedSnake(){\n        MyFrame.MySnake.isRed=1;\n        System.out.println(\"Selected Red Snake\");\n    }\n\n    //if button is clicked, application is closed\n    public void exitButton(){\n        Platform.exit();\n    }\n\n    //displays rules when clicked\n    //goes to rules.fxml screen\n    public void rulesButton(ActionEvent e) throws IOException {\n        root = FXMLLoader.load(getClass().getResource(\"rules.fxml\"));\n        stage=(Stage)((Node)e.getSource()).getScene().getWindow();\n        scene = new Scene(root);\n        stage.setScene(scene);\n        stage.show();\n    }\n\n\n    //called when user clicks Begin button\n    public void beginGame(ActionEvent event) throws InterruptedException, IOException {\n        //store final choices into variable so Play class can use them\n        int finalChoice = choice;\n        int finalBg = bg;\n\n        //check if username is null or not\n        //if null, initialise finalVariables to 6\n        //-> go to else statement\n        //-> display Error screen\n        String username=nameTextField.getText();\n        highscore.addNameToHighScore(username);\n\n        //if no username has been entered go to Error screen\n        if (username.length()<1){\n            finalChoice =6;\n            finalBg =6;\n        }\n\n        //Play class displays UI-background 1 (sky background)\n        if (finalChoice == 0 && finalBg == 0) {\n            Play play = new Play();\n            Thread.sleep(1000);\n            play.playBegins();\n\n        }\n        //Play class displays UI-background 2 (happy background)\n        if (finalChoice == 0 && finalBg == 1) {\n            Play play = new Play();\n            Thread.sleep(1000);\n            play.playBegins2();\n\n        }\n        //Play class displays UI-background 3 (advanced level)\n        if(finalChoice ==1 && finalBg !=0 && finalBg != 1){\n            Play play = new Play();\n            Thread.sleep(1000);\n            play.playBegins3();\n        }\n\n\n        //if user does not select a valid option, return to Error screen\n        else {\n            FXMLLoader loader = new FXMLLoader(getClass().getResource(\"errorEntry.fxml\"));\n            root = loader.load();\n\n            ErrorScreen scene2Controller = loader.getController();\n            scene2Controller.displayError();\n\n            stage = (Stage) ((Node) event.getSource()).getScene().getWindow();\n            scene = new Scene(root);\n            stage.setScene(scene);\n            stage.show();\n        }\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/classHolder/StartScreen.java b/src/classHolder/StartScreen.java
+--- a/src/classHolder/StartScreen.java	(revision b47330579b923818631d80c1628c830a9eeb628a)
++++ b/src/classHolder/StartScreen.java	(date 1667924533864)
+@@ -13,6 +13,8 @@
+ 
+ import java.io.IOException;
+ 
++/** Called when user clicks Go To Start Screen in AllTimeScores.
++ * @author Nderon Beqiri-modified */
+ public class StartScreen {
+     private Parent root;
+     private Scene scene;
+@@ -34,57 +36,59 @@
+     private final Image myImage3 = new Image(getClass().getResourceAsStream("UI-background3.png"));
+ 
+ 
+-    //allow user to click Play Background Music and play frogger.mp3
++    /**Allows user to click Play Background Music and play frogger.mp3*/
+     @FXML
+     void onPlayAudio (ActionEvent event){
+         musicPlayer.play();
+     }
+ 
+-    //called when user clicks Sky Background button
++    /**Called when user clicks Sky Background button*/
+     public void displayImage(){
+         myImageView.setImage(myImage);
+         bg=1;
+     }
+ 
+-    //called when user clicks Happy Background button
++    /**Called when user clicks Happy Background button*/
+     public void displayImage2(){
+         myImageView.setImage(myImage2);
+         bg=0;
+     }
+ 
+-    //called when user clicks Basic Level button
+-    public void basicLevel(){
++    /**Called when user clicks Basic Level button*/
++    public int basicLevel(){
+         choice=0;
+         System.out.println("Selected Basic Level");
++        return choice;
+     }
+ 
+-    //called when user clicks Advanced Level button
++    /**Called when user clicks Advanced Level button*/
+     public void advancedLevel(){
+         choice=1;
+         myImageView.setImage(myImage3);
+         System.out.println("Selected Advanced Level");
+     }
+ 
+-    //if button is clicked, snake will be green
+-    public void playGreenSnake(){
++    /**If button is clicked, snake will be green*/
++    public int playGreenSnake(){
+         MyFrame.MySnake.isRed=0;
+         System.out.println("Selected Green Snake");
++        return MyFrame.MySnake.isRed;
+ 
+     }
+ 
+-    //if button is clicked, snake will be red
+-    public void playRedSnake(){
++    /**If button is clicked, snake will be red*/
++    public int playRedSnake(){
+         MyFrame.MySnake.isRed=1;
+         System.out.println("Selected Red Snake");
++        return MyFrame.MySnake.isRed;
+     }
+ 
+-    //if button is clicked, application is closed
++    /**If button is clicked, application is closed*/
+     public void exitButton(){
+         Platform.exit();
+     }
+ 
+-    //displays rules when clicked
+-    //goes to rules.fxml screen
++    /**Displays rules when clicked by going to rules.fxml screen*/
+     public void rulesButton(ActionEvent e) throws IOException {
+         root = FXMLLoader.load(getClass().getResource("rules.fxml"));
+         stage=(Stage)((Node)e.getSource()).getScene().getWindow();
+@@ -94,7 +98,7 @@
+     }
+ 
+ 
+-    //called when user clicks Begin button
++    /**Called when user clicks Begin button*/
+     public void beginGame(ActionEvent event) throws InterruptedException, IOException {
+         //store final choices into variable so Play class can use them
+         int finalChoice = choice;
+Index: src/module-info.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>module Snake {\n    requires java.desktop;\n    requires jlayer;\n    requires javafx.graphics;\n    requires javafx.fxml;\n    requires javafx.controls;\n    requires javafx.media;\n    opens classHolder;\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/module-info.java b/src/module-info.java
+--- a/src/module-info.java	(revision b47330579b923818631d80c1628c830a9eeb628a)
++++ b/src/module-info.java	(date 1667834424000)
+@@ -5,5 +5,9 @@
+     requires javafx.fxml;
+     requires javafx.controls;
+     requires javafx.media;
++    requires org.junit.jupiter.api;
++    requires junit;
+     opens classHolder;
++    opens Tests;
++
+ }
+\ No newline at end of file

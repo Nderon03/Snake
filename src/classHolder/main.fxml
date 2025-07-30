@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="classHolder.StartScreen">
+   <children>
+      <ImageView fx:id="myImageView" fitHeight="400.0" fitWidth="600.0" pickOnBounds="true">
+         <image>
+            <Image url="@startScreenSnake.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="296.0" layoutY="336.0" mnemonicParsing="false" onAction="#onPlayAudio" text="Play Background Music">
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button layoutX="100.0" layoutY="283.0" mnemonicParsing="false" onAction="#displayImage" text="Happy Background" />
+      <Label layoutX="90.0" layoutY="48.0" text="Snakee Yipee" textFill="#db0000">
+         <font>
+            <Font name="Bauhaus 93" size="50.0" />
+         </font>
+      </Label>
+      <Label layoutX="95.0" layoutY="113.0" text="Select a gamemode, background, and colour to play" textFill="#db0000">
+         <font>
+            <Font name="Bauhaus 93" size="14.0" />
+         </font>
+      </Label>
+      <Button layoutX="100.0" layoutY="187.0" mnemonicParsing="false" onAction="#basicLevel" text="Basic Level" />
+      <Button layoutX="100.0" layoutY="219.0" mnemonicParsing="false" onAction="#advancedLevel" text="Advanced Level" />
+      <TextField fx:id="nameTextField" layoutX="293.0" layoutY="253.0" />
+      <Label layoutX="230.0" layoutY="257.0" text="username" textFill="#db0000">
+         <font>
+            <Font name="Bauhaus 93" size="14.0" />
+         </font>
+      </Label>
+      <Button layoutX="342.0" layoutY="294.0" mnemonicParsing="false" onAction="#beginGame" text="Begin" />
+      <Label layoutX="9.0" layoutY="378.0" text="ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss" textFill="#db0000">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <Label layoutY="5.0" text="ssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss" textFill="#db0000" />
+      <Button layoutX="202.0" layoutY="155.0" mnemonicParsing="false" onAction="#playRedSnake" text="Red Snake" />
+      <Button layoutX="100.0" layoutY="251.0" mnemonicParsing="false" onAction="#displayImage2" text="Sky Background" />
+      <Button layoutX="100.0" layoutY="155.0" mnemonicParsing="false" onAction="#playGreenSnake" text="Green Snake" />
+      <Button layoutX="100.0" layoutY="315.0" mnemonicParsing="false" onAction="#exitButton" text="Exit" />
+      <Button layoutX="100.0" layoutY="349.0" mnemonicParsing="false" onAction="#rulesButton" text="Rules" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="classHolder.ErrorScreen">
+   <children>
+      <ImageView fitHeight="410.0" fitWidth="600.0" pickOnBounds="true">
+         <image>
+            <Image url="@startScreenSnake.png" />
+         </image>
+      </ImageView>
+      <Button layoutX="74.0" layoutY="319.0" mnemonicParsing="false" onAction="#resetButton" text="Go back" />
+      <Label layoutX="74.0" layoutY="62.0" text="Rules" textFill="#005eff">
+         <font>
+            <Font name="Bauhaus 93" size="36.0" />
+         </font>
+      </Label>
+      <Label layoutX="74.0" layoutY="126.0" text="To begin with selet a snake color by clicking the Green Snake or Red Snake button" textFill="RED">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <Label layoutX="74.0" layoutY="148.0" text="If neither are selected, the snake's default color will be green" textFill="RED">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <Label layoutX="74.0" layoutY="205.0" text="Select between basic level and advanced level" textFill="#f2ff00">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <Label layoutX="74.0" layoutY="230.0" text="If basic level, select between happy and sky background, enter a username, then click begin" textFill="#00ffa6">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+      <Label layoutX="74.0" layoutY="254.0" text="If advanced level, enter a username then click begin" textFill="#b000c0">
+         <font>
+            <Font size="10.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

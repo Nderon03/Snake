@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d911fe45-1ce2-401c-b304-e515c73540da" name="Changes" comment="All Tests and Code complete&#10;--tests added for every class">
+      <change afterPath="$PROJECT_DIR$/src/GameUtilities/package-info.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/classHolder/MySnake.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/classHolder/SnakeObject.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AllTimeScores.txt" beforeDir="false" afterPath="$PROJECT_DIR$/AllTimeScores.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/MusicPlayerTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/MusicPlayerTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/MyFrameTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/MyFrameTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/MySnakeTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/MySnakeTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/PlayTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/PlayTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Tests/RectanglesTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Tests/RectanglesTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classHolder/AllTimeScores.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classHolder/AllTimeScores.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classHolder/ErrorScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classHolder/ErrorScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classHolder/Food.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classHolder/Food.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classHolder/GameUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameUtilities/GameUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classHolder/ImageUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classHolder/ImageUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classHolder/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classHolder/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classHolder/MusicPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classHolder/MusicPlayer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classHolder/MyFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classHolder/MyFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classHolder/Play.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classHolder/Play.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classHolder/Rectangles.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classHolder/Rectangles.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classHolder/ScoreToFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classHolder/ScoreToFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classHolder/StartScreen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/classHolder/StartScreen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classHolder/displayScores.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/classHolder/displayScores.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classHolder/dollar.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameUtilities/dollar.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classHolder/end.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameUtilities/end.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classHolder/errorEntry.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/classHolder/errorEntry.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classHolder/food-apple.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameUtilities/food-apple.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classHolder/food-banana.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameUtilities/food-banana.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classHolder/food-blueberry.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameUtilities/food-blueberry.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classHolder/food-cherry.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameUtilities/food-cherry.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classHolder/food-durian.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameUtilities/food-durian.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classHolder/food-grape.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameUtilities/food-grape.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classHolder/food-grapefruit.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameUtilities/food-grapefruit.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classHolder/food-kiwi.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameUtilities/food-kiwi.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classHolder/food-lemon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameUtilities/food-lemon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classHolder/food-litchi.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameUtilities/food-litchi.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classHolder/food-mango.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameUtilities/food-mango.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classHolder/food-orange.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameUtilities/food-orange.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classHolder/food-peach.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameUtilities/food-peach.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classHolder/food-pear.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameUtilities/food-pear.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classHolder/food-pineapple.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameUtilities/food-pineapple.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classHolder/food-pitaya.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameUtilities/food-pitaya.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classHolder/food-strawberry.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameUtilities/food-strawberry.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classHolder/food-watermelon.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameUtilities/food-watermelon.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classHolder/lowscore.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/GameUtilities/lowscore.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classHolder/main.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/classHolder/main.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classHolder/rules.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/classHolder/rules.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/snake/UI-background.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/snake/UI-background2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/snake/endFacts.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/snake/frogger.mp3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/snake/main.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/snake/snake-logo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/example/snake/startScreenSnake.png" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="module-info" />
+        <option value="package-info" />
+        <option value="Class" />
+        <option value="JavaFXApplication" />
+        <option value="FxmlFile" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="MIXED" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2GdJn0JRTrjH5vaZhU5ZI1LOTkm" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Downloaded.Files.Path.Enabled": "false",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "last_opened_file_path": "C:/Users/beqir/IdeaProjects/BeqiriNderon_19/src",
+    "project.structure.last.edited": "Facets",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "preferences.pluginManager"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\beqir\IdeaProjects\BeqiriNderon_19\src" />
+      <recent name="C:\Users\beqir\IdeaProjects\BeqiriNderon_19\src\GameUtilities" />
+      <recent name="C:\Users\beqir\IdeaProjects\BeqiriNderon_19\src\classHolder" />
+      <recent name="C:\Users\beqir\IdeaProjects\BeqiriNderon_19\src\Tests" />
+      <recent name="C:\Users\beqir\IdeaProjects\Snake\src\classHolder" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\beqir\IdeaProjects\BeqiriNderon_19\src\classHolder" />
+      <recent name="C:\Users\beqir\IdeaProjects\Snake" />
+      <recent name="C:\Users\beqir\IdeaProjects\Snake\src" />
+      <recent name="C:\Users\beqir\IdeaProjects\Snake\src\classHolder" />
+      <recent name="C:\Users\beqir\IdeaProjects\Snake\src\imageHolder" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="classHolder" />
+      <recent name="Tests" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="MySnakeTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Snake" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Tests" />
+      <option name="MAIN_CLASS_NAME" value="Tests.MySnakeTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="PlayTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Snake" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Tests" />
+      <option name="MAIN_CLASS_NAME" value="Tests.PlayTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RectanglesTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Snake" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Tests" />
+      <option name="MAIN_CLASS_NAME" value="Tests.RectanglesTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="ScoreToFileTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Snake" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Tests" />
+      <option name="MAIN_CLASS_NAME" value="Tests.ScoreToFileTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="StartScreenTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="Snake" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Tests.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="Tests" />
+      <option name="MAIN_CLASS_NAME" value="Tests.StartScreenTest" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JUnit.StartScreenTest" />
+        <item itemvalue="JUnit.ScoreToFileTest" />
+        <item itemvalue="JUnit.RectanglesTest" />
+        <item itemvalue="JUnit.PlayTest" />
+        <item itemvalue="JUnit.MySnakeTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d911fe45-1ce2-401c-b304-e515c73540da" name="Changes" comment="" />
+      <created>1666712693206</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1666712693206</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Initial Clean Up- moduleinfo added, one new package.&#10;Frame bounds fixed, fruit images fixed to display all 17 fruits.&#10;Audio made to loop until the user loses the game.&#10;Simple graphic showing final score added, custom image added to be displayed if user scores 0.">
+      <created>1666871953034</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1666871953034</updated>
+    </task>
+    <task id="LOCAL-00002" summary="JFX Start Screen Implemented&#10;--5/6 Buttons of Start Screen Completed&#10;--Start Screen linked to Play method which starts the game after user has selected data&#10;--Reset and Exit Buttons added incase of human error in Start Screen&#10;--Single Player mode near completion&#10;--Music tweaked to end on the loop the game ends">
+      <created>1667156700390</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1667156700390</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Cleaning of Code and gave Advance Level Button meaningful function&#10;-- removal of Paddle and Snake class (were not in use)&#10;-- modified Start Screen UI for clearer view&#10;-- Advance Level button changes background in Start Screen and in game&#10;-- ensured player enters username or they cannot play&#10;--added comments to Scene 1 and Scene 2 for clear functionality">
+      <created>1667214160334</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1667214160334</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Scene 2 Completed&#10;--tweaked displayError() function as username was unnecessary">
+      <created>1667214436535</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1667214436535</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Left Hand Gameplay&#10;-- implemented keys W A S D to work to allow left handed players to play">
+      <created>1667222488445</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1667222488445</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Added File that stores all time scores&#10;-- ScoreToFile class added with 2 function&#10;-----storing username of player&#10;-----storing score of player&#10;Highscore.txt file added to store results&#10;--format&#10;-----username&#10;-----score">
+      <created>1667237611523</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1667237611523</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Background music button implemented&#10;-- frogger.mp3 will play when Play Background Music button on Start Screen is clicked">
+      <created>1667244736979</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1667244736979</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Refactoring: Public -&gt; Private and Removal of unused&#10;--every class that previously had public variables have now become private&#10;-- removal of unnecessary imports&#10;--removal of unnecessary variables&#10;--removal of unnecessary methods">
+      <created>1667247591961</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1667247591961</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Renamed Classes for clarity&#10;--main method placed under Main class&#10;--Scene1 and Scene2 renamed to StartScrren and ErrorScreen&#10;--renamed Highscore.txt file to AllTimeScores.txt">
+      <created>1667248197163</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1667248197163</updated>
+    </task>
+    <task id="LOCAL-00010" summary="End of game changes, username displayed and more&#10;-- username will be shown at bottom of fail image once game ends, with a well played message&#10;-- username will be shown as part of special message if user achieves score of 0&#10;--all variables made private&#10;-- all unnecessary imports removed&#10;-- tweaked UI by improving font to make it more appealing to user&#10;-- more comments added for clarity of methods in each class">
+      <created>1667305604037</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1667305604037</updated>
+    </task>
+    <task id="LOCAL-00011" summary="All time score list output&#10;-- added method to display all scores after game ends&#10;-- added newlines to text file after each game for clearer structure">
+      <created>1667386441973</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1667386441973</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Red Snake option added&#10;-- user can select between green and red snake&#10;---- button created for each option&#10;-- Play class now only called when begin button is clicked&#10;-- added 2 new images for snake head right and snake body right (red color)">
+      <created>1667486505749</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1667486505749</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Implemented All Time Score into a JFX Screen&#10;-- NEXT STEP: LINK IT TO THE GAME ENDING&#10;-- added new fxml file that displays all scores&#10;-- added new class that defines the buttons in displayScores.fxml and the text area">
+      <created>1667495641083</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1667495641084</updated>
+    </task>
+    <task id="LOCAL-00014" summary="All Time Score list displayed at start&#10;-- all scores displayed in the beginning&#10;-- button that allows user to go to start screen&#10;-- button that allows user to exit&#10;Added exit button to Start Screen&#10;-- when exit button is clicked, application closes&#10;-- tidied up the UI to improve visual quality">
+      <created>1667561394487</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1667561394487</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Obstacles Added to Sky Background game&#10;--added 4 different color rectangles (walls)&#10;-- when snake touches wall, game will end">
+      <created>1667650813698</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1667650813698</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Obstacles Added to Happy Background game&#10;--added 1 triagle (user can enter but not touch vertices)&#10;--added 1 square, user cannot touch">
+      <created>1667652590486</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1667652590486</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Implemented Rules Screen for clarity&#10;-- new fxml file added called rules to display rules when user clicks rules button on start screen&#10;-- changed main fxml file by deleting labels explaining rules and instead adding new button for it">
+      <created>1667654017237</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1667654017237</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Added Obstacles to advanced level&#10;-- advanced level now has walls, where if touched, game ends&#10;-- fixed rules fxml file">
+      <created>1667666279494</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1667666279494</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Empty Text File to download and store all time scores&#10;--user can download premade empty file which is appeneded after a game is played">
+      <created>1667671642711</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1667671642711</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Rename of Classes, Files and Added Comments&#10;-- classes renamed to imply unique intent&#10;-- fxml files renamed to describe what they show&#10;-- comments added in most methods to describe functionality">
+      <created>1667671717404</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1667671717404</updated>
+    </task>
+    <task id="LOCAL-00021" summary="All Time Scores File for download&#10;-- user can download file play Snake&#10;----- after each game, name entered and score is appended to file&#10;------file is read to AllTimeScores class which displays scores when fxml file is called">
+      <created>1667672330542</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1667672330542</updated>
+    </task>
+    <task id="LOCAL-00022" summary="All Time Scores File for download&#10;-- user can download file play Snake&#10;----- after each game, name entered and score is appended to file&#10;------file is read to AllTimeScores class which displays scores when fxml file is called">
+      <created>1667672383685</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1667672383685</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Food made to not spawn in obstacles&#10;--food objects now spawn outside of obstacles">
+      <created>1668032695103</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1668032695103</updated>
+    </task>
+    <task id="LOCAL-00024" summary="All Tests and Code complete&#10;--tests added for every class">
+      <created>1668716137676</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1668716137676</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="BEK_SORT_TYPE" value="1" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Initial Clean Up- moduleinfo added, one new package.&#10;Frame bounds fixed, fruit images fixed to display all 17 fruits.&#10;Audio made to loop until the user loses the game.&#10;Simple graphic showing final score added, custom image added to be displayed if user scores 0." />
+    <MESSAGE value="JFX Start Screen Implemented&#10;--5/6 Buttons of Start Screen Completed&#10;--Start Screen linked to Play method which starts the game after user has selected data&#10;--Reset and Exit Buttons added incase of human error in Start Screen&#10;--Single Player mode near completion&#10;--Music tweaked to end on the loop the game ends" />
+    <MESSAGE value="Cleaning of Code and gave Advance Level Button meaningful function&#10;-- removal of Paddle and Snake class (were not in use)&#10;-- modified Start Screen UI for clearer view&#10;-- Advance Level button changes background in Start Screen and in game&#10;-- ensured player enters username or they cannot play&#10;--added comments to Scene 1 and Scene 2 for clear functionality" />
+    <MESSAGE value="Scene 2 Completed&#10;--tweaked displayError() function as username was unnecessary" />
+    <MESSAGE value="Left Hand Gameplay&#10;-- implemented keys W A S D to work to allow left handed players to play" />
+    <MESSAGE value="Added File that stores all time scores&#10;-- ScoreToFile class added with 2 function&#10;-----storing username of player&#10;-----storing score of player&#10;Highscore.txt file added to store results&#10;--format&#10;-----username&#10;-----score" />
+    <MESSAGE value="Background music button implemented&#10;-- frogger.mp3 will play when Play Background Music button on Start Screen is clicked" />
+    <MESSAGE value="Refactoring: Public -&gt; Private and Removal of unused&#10;--every class that previously had public variables have now become private&#10;-- removal of unnecessary imports&#10;--removal of unnecessary variables&#10;--removal of unnecessary methods" />
+    <MESSAGE value="Renamed Classes for clarity&#10;--main method placed under Main class&#10;--Scene1 and Scene2 renamed to StartScrren and ErrorScreen&#10;--renamed Highscore.txt file to AllTimeScores.txt" />
+    <MESSAGE value="End of game changes, username displayed and more&#10;-- username will be shown at bottom of fail image once game ends, with a well played message&#10;-- username will be shown as part of special message if user achieves score of 0&#10;--all variables made private&#10;-- all unnecessary imports removed&#10;-- tweaked UI by improving font to make it more appealing to user&#10;-- more comments added for clarity of methods in each class" />
+    <MESSAGE value="All time score list output&#10;-- added method to display all scores after game ends&#10;-- added newlines to text file after each game for clearer structure" />
+    <MESSAGE value="Red Snake option added&#10;-- user can select between green and red snake&#10;---- button created for each option&#10;-- Play class now only called when begin button is clicked&#10;-- added 2 new images for snake head right and snake body right (red color)" />
+    <MESSAGE value="Implemented All Time Score into a JFX Screen&#10;-- NEXT STEP: LINK IT TO THE GAME ENDING&#10;-- added new fxml file that displays all scores&#10;-- added new class that defines the buttons in displayScores.fxml and the text area" />
+    <MESSAGE value="All Time Score list displayed at start&#10;-- all scores displayed in the beginning&#10;-- button that allows user to go to start screen&#10;-- button that allows user to exit&#10;Added exit button to Start Screen&#10;-- when exit button is clicked, application closes&#10;-- tidied up the UI to improve visual quality" />
+    <MESSAGE value="Obstacles Added to Sky Background game&#10;--added 4 different color rectangles (walls)&#10;-- when snake touches wall, game will end" />
+    <MESSAGE value="Obstacles Added to Happy Background game&#10;--added 1 triagle (user can enter but not touch vertices)&#10;--added 1 square, user cannot touch" />
+    <MESSAGE value="Implemented Rules Screen for clarity&#10;-- new fxml file added called rules to display rules when user clicks rules button on start screen&#10;-- changed main fxml file by deleting labels explaining rules and instead adding new button for it" />
+    <MESSAGE value="Added Obstacles to advanced level&#10;-- advanced level now has walls, where if touched, game ends&#10;-- fixed rules fxml file" />
+    <MESSAGE value="Empty Text File to download and store all time scores&#10;--user can download premade empty file which is appeneded after a game is played" />
+    <MESSAGE value="Rename of Classes, Files and Added Comments&#10;-- classes renamed to imply unique intent&#10;-- fxml files renamed to describe what they show&#10;-- comments added in most methods to describe functionality" />
+    <MESSAGE value="All Time Scores File for download&#10;-- user can download file play Snake&#10;----- after each game, name entered and score is appended to file&#10;------file is read to AllTimeScores class which displays scores when fxml file is called" />
+    <MESSAGE value="Final deletion of unnecessary items&#10;--not needed zip files deleted&#10;--no unnecessary import statements&#10;--no unused variables&#10;--no unused methods&#10;--no unused images&#10;--no unused classes&#10;--no unused fxml files&#10;--no unused audio files" />
+    <MESSAGE value="All Tests and Code complete&#10;--tests added for every class" />
+    <option name="LAST_COMMIT_MESSAGE" value="All Tests and Code complete&#10;--tests added for every class" />
+  </component>
+</project>
